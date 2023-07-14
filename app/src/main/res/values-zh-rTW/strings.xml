@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CST2335 FinalProject</string>
+    <string name="app_title">CST2335 Final Project</string>
+    <string name="aviationTitle">航班記錄查閱</string>
+    <string name="quizTitle">Trivia題庫</string>
+    <string name="currencyTitle">外幣兌換</string>
+    <string name="bearTitle">熊熊生成器</string>
+</resources>

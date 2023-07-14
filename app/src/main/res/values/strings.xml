@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">CST2335 FinalProject</string>
+    <string name="app_title">CST2335 Final Project</string>
+    <string name="aviationTitle">Aviation Tracking</string>
+    <string name="quizTitle">Trivia Questions</string>
+    <string name="currencyTitle">Currency Converter</string>
+    <string name="bearTitle">Bear Generator</string>
 </resources>

@@ -7,12 +7,96 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/appTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/app_title"
+        android:gravity="center"
+        android:text="@string/app_title"
+        android:textSize="26dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/aviationIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitle"
+        app:srcCompat="@drawable/airport" />
+
+    <ImageView
+        android:id="@+id/quizIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/aviationIcon"
+        app:srcCompat="@drawable/quiz" />
+
+    <ImageView
+        android:id="@+id/currencyIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/aviationTitle"
+        app:layout_constraintStart_toStartOf="@+id/aviationTitle"
+        app:layout_constraintTop_toBottomOf="@+id/aviationTitle"
+        app:srcCompat="@drawable/currency" />
+
+    <ImageView
+        android:id="@+id/bearIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/quizTitle"
+        app:layout_constraintStart_toStartOf="@+id/quizTitle"
+        app:layout_constraintTop_toBottomOf="@+id/quizTitle"
+        app:srcCompat="@drawable/bear" />
+
+    <TextView
+        android:id="@+id/aviationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/aviationTitle"
+        app:layout_constraintEnd_toEndOf="@+id/aviationIcon"
+        app:layout_constraintStart_toStartOf="@+id/aviationIcon"
+        app:layout_constraintTop_toBottomOf="@+id/aviationIcon" />
+
+    <TextView
+        android:id="@+id/quizTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/quizTitle"
+        app:layout_constraintEnd_toEndOf="@+id/quizIcon"
+        app:layout_constraintStart_toStartOf="@+id/quizIcon"
+        app:layout_constraintTop_toBottomOf="@+id/quizIcon" />
+
+    <TextView
+        android:id="@+id/currencyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/currencyTitle"
+        app:layout_constraintEnd_toEndOf="@+id/currencyIcon"
+        app:layout_constraintStart_toStartOf="@+id/currencyIcon"
+        app:layout_constraintTop_toBottomOf="@+id/currencyIcon" />
+
+    <TextView
+        android:id="@+id/bearTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/bearTitle"
+        app:layout_constraintEnd_toEndOf="@+id/bearIcon"
+        app:layout_constraintStart_toStartOf="@+id/bearIcon"
+        app:layout_constraintTop_toBottomOf="@+id/bearIcon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
