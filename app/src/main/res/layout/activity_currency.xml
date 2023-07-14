@@ -7,10 +7,67 @@
     tools:context=".CurrencyActivity">
 
     <TextView
-        android:id="@+id/testing"
+        android:id="@+id/currencyModuleHeader"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/currencyHeader"
+        android:gravity="center"
+        android:text="@string/currencyTitle"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        android:textColor="@color/currencyHeaderFont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/convertButtonImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/money_exchange"
+        tools:layout_editor_absoluteX="170dp"
+        tools:layout_editor_absoluteY="149dp" />
+
+    <EditText
+        android:id="@+id/currencyFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Currency Test"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="135dp" />
+        android:hint="Currency"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="116dp" />
+
+    <EditText
+        android:id="@+id/currencyTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Currency"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+
+    <EditText
+        android:id="@+id/amountFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="amount"
+        tools:layout_editor_absoluteX="285dp"
+        tools:layout_editor_absoluteY="116dp" />
+
+    <TextView
+        android:id="@+id/amountTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="amount"
+        tools:layout_editor_absoluteX="285dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/currencyRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
