@@ -6,4 +6,5 @@
     <string name="quizTitle">Trivia題庫</string>
     <string name="currencyTitle">外幣兌換</string>
     <string name="bearTitle">熊熊生成器</string>
+    <string name="about">關於我們</string>
 </resources>

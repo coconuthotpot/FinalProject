@@ -5,4 +5,5 @@
     <string name="quizTitle">Trivia Questions</string>
     <string name="currencyTitle">Currency Converter</string>
     <string name="bearTitle">Bear Generator</string>
+    <string name="about">About</string>
 </resources>
