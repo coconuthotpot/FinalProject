@@ -4,13 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/currencyBG"
     tools:context=".CurrencyActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp" />
+
     <TextView
-        android:id="@+id/testing"
+        android:id="@+id/currencyModuleHeader"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/currencyHeader"
+        android:gravity="center"
+        android:text="@string/currencyTitle"
+        android:textColor="@color/currencyHeaderFont"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <ImageView
+        android:id="@+id/convertButtonImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/currencyRecycler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currencyModuleHeader"
+        app:srcCompat="@drawable/currency_exchange" />
+
+    <EditText
+        android:id="@+id/currencyFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Currency Test"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="135dp" />
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/currencyInput"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/convertButtonImage"
+        app:layout_constraintTop_toBottomOf="@+id/currencyModuleHeader" />
+
+    <EditText
+        android:id="@+id/currencyTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="@string/currencyInput"
+        android:inputType="text"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/currencyFrom"
+        app:layout_constraintStart_toStartOf="@+id/currencyFrom"
+        app:layout_constraintTop_toBottomOf="@+id/currencyFrom" />
+
+
+    <EditText
+        android:id="@+id/amountFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:hint="@string/currencyAmount"
+        android:inputType="number"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/convertButtonImage"
+        app:layout_constraintTop_toBottomOf="@+id/currencyModuleHeader" />
+
+    <TextView
+        android:id="@+id/amountTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:hint="@string/currencyAmount"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/amountFrom"
+        app:layout_constraintStart_toStartOf="@+id/amountFrom"
+        app:layout_constraintTop_toBottomOf="@+id/amountFrom" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/currencyRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:background="@color/currencyRecordBG"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
