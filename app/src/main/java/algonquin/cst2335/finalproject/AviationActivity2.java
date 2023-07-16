@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class AviationActivity2 extends AviationActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +18,13 @@ public class AviationActivity2 extends AviationActivity{
 
         Button showSnackbarButton = findViewById(R.id.button2);
         Button showAlertDialogButton = findViewById(R.id.button3);
+        View parentLayout = findViewById(android.R.id.content);
 
         showSnackbarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AviationActivity2.this, "This is a Toast notification", Toast.LENGTH_SHORT).show();
+                Snackbar snackbar = Snackbar.make(parentLayout, "This is a Snackbar notification", Snackbar.LENGTH_SHORT);
+                snackbar.show();
             }
         });
 
