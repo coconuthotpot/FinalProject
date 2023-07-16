@@ -5,4 +5,6 @@
     <color name="app_title">#41D8EC</color>
     <color name="currencyHeader">#284505</color>
     <color name="currencyHeaderFont">#FFFDEA</color>
+    <color name="currencyBG">#EBF1E6</color>
+    <color name="currencyRecordBG">#B4DFD1</color>
 </resources>
