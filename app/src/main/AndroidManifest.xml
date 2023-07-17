@@ -12,6 +12,11 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
+            android:name=".AviationActivity2"
+            android:label="Next Activity" >
+        </activity>
+
+        <activity
             android:name=".BearActivity"
             android:exported="false" />
         <activity
