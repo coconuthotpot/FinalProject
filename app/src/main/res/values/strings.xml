@@ -10,4 +10,9 @@
     <string name="currencyInput">Currency</string>
     <string name="currencyAmount">Amount</string>
 
+
+
+    <string name="width">Weight</string>
+    <string name="height">Height</string>
+
 </resources>
