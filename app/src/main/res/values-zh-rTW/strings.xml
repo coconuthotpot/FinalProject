@@ -6,6 +6,7 @@
     <string name="quizTitle">Trivia題庫</string>
     <string name="currencyTitle">外幣兌換</string>
     <string name="bearTitle">熊熊生成器</string>
+    <string name="contact">聯絡我們</string>
     <string name="about">關於我們</string>
     <string name="currencyInput">貨幣</string>
     <string name="currencyAmount">幣額</string>
