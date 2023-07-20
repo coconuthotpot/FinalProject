@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             builder.create().show();
         } else if (item.getItemId() == R.id.currency) {
             builder.setPositiveButton("Yes",((dialog, click) -> {
-                Intent currencyPage = new Intent(MainActivity.this, BearActivity.class);
+                Intent currencyPage = new Intent(MainActivity.this, CurrencyActivity.class);
                 startActivity(currencyPage);
             }));
             builder.setNegativeButton("No",((dialog, click) -> {}));
