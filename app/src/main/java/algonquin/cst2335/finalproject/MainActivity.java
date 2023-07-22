@@ -67,10 +67,16 @@ public class MainActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-        builder.setMessage("Change Page?");
-        builder.setTitle("Stay or Go");
-
-        if (item.getItemId() == R.id.aviation) {
+        if (item.getItemId() == R.id.help) {
+            builder.setTitle("Page Navigation");
+            builder.setMessage("Click any module you need\n" +
+                    "Can change to other page by clicking top right help bar");
+            builder.setPositiveButton("OK",((dialog, click) -> {}));
+            builder.setNegativeButton("",((dialog, click) -> {}));
+            builder.create().show();
+        } else if (item.getItemId() == R.id.aviation) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent aviationPage = new Intent(MainActivity.this, AviationActivity.class);
                 startActivity(aviationPage);
@@ -78,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
             builder.setNegativeButton("No",((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.quiz) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent triviaPage = new Intent(MainActivity.this, TriviaActivity.class);
                 startActivity(triviaPage);
@@ -85,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
             builder.setNegativeButton("No",((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.currency) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent currencyPage = new Intent(MainActivity.this, CurrencyActivity.class);
                 startActivity(currencyPage);
@@ -92,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
             builder.setNegativeButton("No",((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.bear) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent bearPage = new Intent(MainActivity.this, BearActivity.class);
                 startActivity(bearPage);

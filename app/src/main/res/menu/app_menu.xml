@@ -3,31 +3,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/help"
+        android:icon="@drawable/help_menu"
+        android:title="@string/help"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/aviation"
         android:icon="@drawable/airplane_menu"
         android:title="@string/aviationTitle"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/quiz"
         android:icon="@drawable/quiz_menu"
         android:title="@string/quizTitle"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/currency"
         android:icon="@drawable/currency_menu"
         android:title="@string/currencyTitle"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/bear"
         android:icon="@drawable/bear_menu"
         android:title="@string/bearTitle"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/contact"
         android:title="@string/contact"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/about"
         android:title="@string/about"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 </menu>

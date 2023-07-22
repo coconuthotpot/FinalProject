@@ -159,17 +159,7 @@ public class CurrencyActivity extends AppCompatActivity {
                     (error) -> {});
 
             queue.add(request);
-
-
-
-
-
         });
-
-
-
-
-
     }
 
     private boolean checkCurrency(String currency) {
@@ -193,10 +183,18 @@ public class CurrencyActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         AlertDialog.Builder builder = new AlertDialog.Builder(CurrencyActivity.this);
 
-        builder.setMessage("Change Page?");
-        builder.setTitle("Stay or Go");
-
-        if (item.getItemId() == R.id.aviation) {
+        if (item.getItemId() == R.id.help) {
+            builder.setTitle("Page Navigation");
+            builder.setMessage("1. Input Currency Code be converted from in top left field;\n" +
+                    "2. Input Currency Code be converted to in the next left field;\n" +
+                    "3. Input the amount you want to convert in the original currency in top right field;\n" +
+                    "4. Click the CONVERT button in the center to get the amount in target currency");
+            builder.setPositiveButton("OK", ((dialog, click) -> {}));
+            builder.setNegativeButton("", ((dialog, click) -> {}));
+            builder.create().show();
+        } else if (item.getItemId() == R.id.aviation) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent aviationPage = new Intent(CurrencyActivity.this, AviationActivity.class);
                 startActivity(aviationPage);
@@ -204,6 +202,8 @@ public class CurrencyActivity extends AppCompatActivity {
             builder.setNegativeButton("No",((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.quiz) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent triviaPage = new Intent(CurrencyActivity.this, TriviaActivity.class);
                 startActivity(triviaPage);
@@ -213,6 +213,8 @@ public class CurrencyActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.currency) {
             Toast.makeText(this, "You are at the current page", Toast.LENGTH_LONG).show();
         } else if (item.getItemId() == R.id.bear) {
+            builder.setMessage("Change Page?");
+            builder.setTitle("Stay or Go");
             builder.setPositiveButton("Yes",((dialog, click) -> {
                 Intent bearPage = new Intent(CurrencyActivity.this, BearActivity.class);
                 startActivity(bearPage);
