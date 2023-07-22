@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/convertButtonImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,12 +44,12 @@
         android:id="@+id/currencyFrom"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
         android:hint="@string/currencyInput"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/convertButtonImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currencyModuleHeader" />
 
     <EditText
@@ -69,7 +69,7 @@
         android:id="@+id/amountFrom"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:hint="@string/currencyAmount"
         android:inputType="number"
@@ -105,7 +105,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/currencyFrom"
-        app:layout_constraintStart_toEndOf="@+id/currencyFrom"
+        app:layout_constraintEnd_toStartOf="@+id/currencyFrom"
         app:layout_constraintTop_toTopOf="@+id/currencyFrom"
         app:srcCompat="@drawable/deposit" />
 
@@ -114,7 +114,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/currencyTo"
-        app:layout_constraintStart_toEndOf="@+id/currencyTo"
+        app:layout_constraintEnd_toStartOf="@+id/currencyTo"
         app:layout_constraintTop_toTopOf="@+id/currencyTo"
         app:srcCompat="@drawable/withdraw" />
 
