@@ -11,22 +11,22 @@
         android:id="@+id/aviation"
         android:icon="@drawable/airplane_menu"
         android:title="@string/aviationTitle"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/quiz"
         android:icon="@drawable/quiz_menu"
         android:title="@string/quizTitle"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/currency"
         android:icon="@drawable/currency_menu"
         android:title="@string/currencyTitle"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/bear"
         android:icon="@drawable/bear_menu"
         android:title="@string/bearTitle"
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/contact"
         android:title="@string/contact"
