@@ -16,4 +16,20 @@
     <string name="width">Weight</string>
     <string name="height">Height</string>
 
+
+
+    <!-- Strings for Menu Bar -->
+    <string name="help_navi">Page Navigation</string>
+    <string name="change_page">Stay or Go</string>
+    <string name="change_page_decision">Change Page?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">Ok</string>
+    <string name="current_page">You are at the current page</string>
+    <string name="contact_msg">Mail Us to Address: 1234 Woodroffe Ave</string>
+    <string name="about_msg">4 Modules Android App</string>
+
+
+    <string name="help_main">Click any module you need; Can change to other page by clicking top right help bar</string>
+    <string name="help_currency">1. Input Currency Code be converted from in top left field; 2. Input Currency Code be converted to in the next left field; 3. Input the amount you want to convert in the original currency in top right field; 4. Click the CONVERT button in the center to get the amount in target currency</string>
 </resources>

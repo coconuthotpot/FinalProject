@@ -68,52 +68,51 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         if (item.getItemId() == R.id.help) {
-            builder.setTitle("Page Navigation");
-            builder.setMessage("Click any module you need\n" +
-                    "Can change to other page by clicking top right help bar");
-            builder.setPositiveButton("OK",((dialog, click) -> {}));
+            builder.setTitle(getString(R.string.help_navi));
+            builder.setMessage(getString(R.string.help_main));
+            builder.setPositiveButton(getString(R.string.ok),((dialog, click) -> {}));
             builder.setNegativeButton("",((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.aviation) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent aviationPage = new Intent(MainActivity.this, AviationActivity.class);
                 startActivity(aviationPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.quiz) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent triviaPage = new Intent(MainActivity.this, TriviaActivity.class);
                 startActivity(triviaPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.currency) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent currencyPage = new Intent(MainActivity.this, CurrencyActivity.class);
                 startActivity(currencyPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.bear) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent bearPage = new Intent(MainActivity.this, BearActivity.class);
                 startActivity(bearPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.contact) {
-            Snackbar.make(aviation, "Mail Us to Address: 1234 Woodroffe Ave", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(aviation, getString(R.string.contact_msg), Snackbar.LENGTH_LONG).show();
         } else if (item.getItemId() == R.id.about) {
-            Toast.makeText(this, "4 Modules Android App", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.about_msg), Toast.LENGTH_LONG).show();
         }
 
         return true;

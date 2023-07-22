@@ -184,47 +184,44 @@ public class CurrencyActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(CurrencyActivity.this);
 
         if (item.getItemId() == R.id.help) {
-            builder.setTitle("Page Navigation");
-            builder.setMessage("1. Input Currency Code be converted from in top left field;\n" +
-                    "2. Input Currency Code be converted to in the next left field;\n" +
-                    "3. Input the amount you want to convert in the original currency in top right field;\n" +
-                    "4. Click the CONVERT button in the center to get the amount in target currency");
+            builder.setTitle(getString(R.string.help_navi));
+            builder.setMessage(getString(R.string.help_currency));
             builder.setPositiveButton("OK", ((dialog, click) -> {}));
             builder.setNegativeButton("", ((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.aviation) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent aviationPage = new Intent(CurrencyActivity.this, AviationActivity.class);
                 startActivity(aviationPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.quiz) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent triviaPage = new Intent(CurrencyActivity.this, TriviaActivity.class);
                 startActivity(triviaPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.currency) {
-            Toast.makeText(this, "You are at the current page", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.current_page), Toast.LENGTH_LONG).show();
         } else if (item.getItemId() == R.id.bear) {
-            builder.setMessage("Change Page?");
-            builder.setTitle("Stay or Go");
-            builder.setPositiveButton("Yes",((dialog, click) -> {
+            builder.setMessage(getString(R.string.change_page_decision));
+            builder.setTitle(getString(R.string.change_page));
+            builder.setPositiveButton(getString(R.string.yes),((dialog, click) -> {
                 Intent bearPage = new Intent(CurrencyActivity.this, BearActivity.class);
                 startActivity(bearPage);
             }));
-            builder.setNegativeButton("No",((dialog, click) -> {}));
+            builder.setNegativeButton(getString(R.string.no),((dialog, click) -> {}));
             builder.create().show();
         } else if (item.getItemId() == R.id.contact) {
-            Snackbar.make(showAmount, "Mail Us to Address: 1234 Woodroffe Ave", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(showAmount, getString(R.string.contact_msg), Snackbar.LENGTH_LONG).show();
         } else if (item.getItemId() == R.id.about) {
-            Toast.makeText(this, "4 Modules Android App", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.about_msg), Toast.LENGTH_LONG).show();
         }
 
         return true;
