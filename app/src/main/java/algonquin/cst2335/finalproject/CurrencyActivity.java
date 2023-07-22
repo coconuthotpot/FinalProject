@@ -3,17 +3,22 @@ package algonquin.cst2335.finalproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.util.Currency;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,10 +42,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import algonquin.cst2335.finalproject.databinding.ActivityCurrencyBinding;
+import algonquin.cst2335.finalproject.databinding.ActivityCurrencyDetailsBinding;
 
 public class CurrencyActivity extends AppCompatActivity {
 
@@ -50,6 +59,11 @@ public class CurrencyActivity extends AppCompatActivity {
     ActivityCurrencyBinding currencyBinding;
     Set<String> currenciesList = CurrenciesList.currenciesList;
     RequestQueue queue = null;
+    CurrencyTransactionDAO ctDAO;
+    AppViewModel currencyModel;
+    ArrayList<CurrencyTransaction> currencyTransactions = new ArrayList<>();
+    private RecyclerView.Adapter myAdapter;
+    ActivityCurrencyDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +75,58 @@ public class CurrencyActivity extends AppCompatActivity {
         setSupportActionBar(currencyBinding.toolbar);
 
         queue = Volley.newRequestQueue(this);
+        
+        CurrencyTransactionDatabase ctdb = Room.databaseBuilder(getApplicationContext(), CurrencyTransactionDatabase.class, "CurrencyTransaction").build();
+        ctDAO = ctdb.ctDAO();
+
+        currencyModel = new ViewModelProvider(this).get(AppViewModel.class);
+        currencyTransactions = currencyModel.currencyTransactions.getValue();
 
         // binding corresponding View items
         currencyFrom = currencyBinding.currencyFrom;
         currencyTo = currencyBinding.currencyTo;
         amountInput = currencyBinding.amountFrom;
         showAmount = currencyBinding.amountTo;
+
+        if (currencyTransactions == null) {
+            currencyModel.currencyTransactions.postValue(currencyTransactions = new ArrayList<>());
+            Executor thread0 = Executors.newSingleThreadExecutor();
+            thread0.execute(() ->
+            {
+                currencyTransactions.addAll( ctDAO.getAllTransactions() ); // get the data from database
+                runOnUiThread( () -> currencyBinding.currencyRecycler.setAdapter( myAdapter ));
+            });
+        }
+
+        // part to send data to recyclerview
+        currencyBinding.currencyRecycler.setLayoutManager(new LinearLayoutManager(this));
+        currencyBinding.currencyRecycler.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+            @Override
+            public int getItemViewType(int position) {
+                return 0;
+            }
+
+            @NonNull
+            @Override
+            public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                binding = ActivityCurrencyDetailsBinding.inflate(getLayoutInflater());
+                return new MyRowHolder(binding.getRoot());
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
+                CurrencyTransaction trans = currencyTransactions.get(position);
+                holder.curFromDetails.setText("");
+                holder.amtToDetails.setText("");
+                holder.curFromDetails.setText("");
+                holder.amtToDetails.setText("");
+            }
+
+            @Override
+            public int getItemCount() {
+                return currencyTransactions.size();
+            }
+        });
 
         // get the saved values in shared preferences
         SharedPreferences prefs = getSharedPreferences("MyCurrencyData", Context.MODE_PRIVATE);
@@ -159,7 +219,16 @@ public class CurrencyActivity extends AppCompatActivity {
                     (error) -> {});
 
             queue.add(request);
+
+            CurrencyTransaction transaction = new CurrencyTransaction(curFrom, curTo, amtFrom, showAmount.getText().toString());
+            Executor thread1 = Executors.newSingleThreadExecutor();
+            thread1.execute( () -> {
+                transaction.id = ctDAO.insertTransaction(transaction);});
+            currencyTransactions.add(transaction);
+            myAdapter.notifyItemInserted(currencyTransactions.size()-1);
         });
+
+
     }
 
     private boolean checkCurrency(String currency) {
@@ -169,6 +238,50 @@ public class CurrencyActivity extends AppCompatActivity {
             return true;
         } else {
             return false;
+        }
+    }
+
+    class MyRowHolder extends RecyclerView.ViewHolder {
+        TextView curFromDetails, curToDetails, amtFromDetails, amtToDetails;
+        public MyRowHolder(@NonNull View itemView) {
+            super(itemView);
+            curFromDetails = itemView.findViewById(R.id.currencyFromDetails);
+            curToDetails = itemView.findViewById(R.id.currencyToDetails);
+            amtFromDetails = itemView.findViewById(R.id.amountFromDetails);
+            amtToDetails = itemView.findViewById(R.id.amountToDetails);
+
+            itemView.setOnClickListener(click -> {
+                int position = getAbsoluteAdapterPosition();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder( CurrencyActivity.this );
+                builder.setTitle("Question:");
+                builder.setMessage("Delete this message?: "  + curFromDetails.getText());
+
+                builder.setPositiveButton("Yes", ((dialog, clk) ->{
+                    CurrencyTransaction removedMsg = currencyTransactions.get(position);
+
+                    Executor thread2 = Executors.newSingleThreadExecutor();
+                    thread2.execute( () -> {
+                        ctDAO.deleteTransaction(removedMsg);}
+                    );
+
+                    currencyTransactions.remove(position);
+                    myAdapter.notifyItemRemoved(position);
+
+                    Snackbar.make(curFromDetails, "You deleted message#" + position, Snackbar.LENGTH_LONG)
+                            .setAction("Undo", check -> {
+                                currencyTransactions.add(position, removedMsg);
+                                myAdapter.notifyItemInserted(position);
+                            })
+                            .show();
+
+                } ));
+
+                builder.setNegativeButton("No", ((dialog, clk) ->{} ));
+
+                builder.create().show();
+            });
+
         }
     }
 
