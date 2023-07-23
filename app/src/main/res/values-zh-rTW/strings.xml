@@ -10,4 +10,20 @@
     <string name="about">關於我們</string>
     <string name="currencyInput">貨幣</string>
     <string name="currencyAmount">幣額</string>
+
+
+    <string name="help">需要協助?</string>
+    <string name="width">宽度</string>
+    <string name="height">高度</string>
+    <string name="help_navi">本頁使用指引</string>
+    <string name="help_currency">1. 在左上輸入本幣匯兌代號;          2. 在左二輸入需要轉換的貨幣代號;          3. 在右上輸入需要轉換的本幣幣額;          4. 按介面中間的轉換鍵以查看新的幣額</string>
+    <string name="change_page">切換模組</string>
+    <string name="change_page_decision">確定切換介面?</string>
+    <string name="yes">確定</string>
+    <string name="no">取消</string>
+    <string name="current_page">你正在此頁面</string>
+    <string name="contact_msg">請郵寄到: 1234 Woodroffe Ave</string>
+    <string name="about_msg">4模組安卓APP</string>
+    <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
+    <string name="ok">知道了</string>
 </resources>
