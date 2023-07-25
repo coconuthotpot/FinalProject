@@ -12,6 +12,13 @@
     <string name="currencyAmount">幣額</string>
 
 
+    <string name="help_flight">請輸入機場代碼，然後按搜索鍵</string>
+    <string name="flight_hint">請輸入機場代碼</string>
+    <string name="search_button">搜索</string>
+    <string name="next_button">下一頁</string>
+
+
+
     <string name="help">需要協助?</string>
     <string name="width">宽度</string>
     <string name="height">高度</string>

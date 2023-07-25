@@ -17,6 +17,13 @@
     <string name="height">Height</string>
 
 
+    <!-- Strings for Aviation -->
+    <string name="help_flight">Enter the airport code , then press search button</string>
+    <string name="flight_hint">Enter airport code</string>
+    <string name="search_button">Search</string>
+    <string name="next_button">Next</string>
+
+
 
     <!-- Strings for Menu Bar -->
     <string name="help_navi">Page Navigation</string>

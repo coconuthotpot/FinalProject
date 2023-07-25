@@ -6,24 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".AviationActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Aviation Stack Flight Tracker"
+        android:layout_marginTop="80dp"
+        android:text="@string/aviationTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <EditText
         android:id="@+id/editText"
-        android:layout_width="192dp"
-        android:layout_height="36dp"
+        android:layout_width="189dp"
+        android:layout_height="45dp"
         android:layout_marginTop="36dp"
-        android:hint="Enter airport code"
+        android:hint="@string/flight_hint"
         android:inputType="text"
         android:maxLines="1"
         app:layout_constraintEnd_toStartOf="@+id/button"
@@ -36,7 +43,7 @@
         android:layout_width="104dp"
         android:layout_height="38dp"
         android:layout_marginEnd="116dp"
-        android:text="Search"
+        android:text="@string/search_button"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText"
@@ -48,15 +55,17 @@
         android:layout_height="772dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="96dp"
         android:layout_height="38dp"
         android:layout_marginTop="36dp"
-        android:text="Next"
+        android:text="@string/next_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@+id/button"
