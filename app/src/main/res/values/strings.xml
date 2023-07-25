@@ -15,6 +15,8 @@
 
     <string name="width">Weight</string>
     <string name="height">Height</string>
+    <string name="help_bear">Enter Width and Height , then press generate button</string>
+    <string name="pressme">Generate a Bear</string>
 
 
 
@@ -32,4 +34,7 @@
 
     <string name="help_main">Click any module you need; Can change to other page by clicking top right help bar</string>
     <string name="help_currency">1. Input Currency Code be converted from in top left field; 2. Input Currency Code be converted to in the next left field; 3. Input the amount you want to convert in the original currency in top right field; 4. Click the CONVERT button in the center to get the amount in target currency</string>
+    <string name="generate_bear">First button</string>
+    <string name="enter_width">Enter Width</string>
+    <string name="enter_height">Enter Height</string>
 </resources>
