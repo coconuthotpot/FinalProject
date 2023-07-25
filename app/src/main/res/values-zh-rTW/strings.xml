@@ -26,4 +26,11 @@
     <string name="about_msg">4模組安卓APP</string>
     <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
     <string name="ok">知道了</string>
+    <string name="help_bear">输入宽度和高度，再点击生成按钮</string>
+
+
+    <string name="pressme">生成熊熊</string>
+    <string name="generate_bear">第一个按钮</string>
+    <string name="enter_width">输入宽度</string>
+    <string name="enter_height">输入高度</string>
 </resources>
