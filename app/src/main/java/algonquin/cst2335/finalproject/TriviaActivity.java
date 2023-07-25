@@ -49,6 +49,9 @@ public class TriviaActivity extends AppCompatActivity {
     private TriviaList adapter;
     protected RequestQueue queue = null;
 
+    private String correctAnswer;
+    private JSONArray results;
+
 
     int score = 0;
     /*int totalQuestion = TriviaActivityQA.question.length;*/
@@ -89,7 +92,10 @@ public class TriviaActivity extends AppCompatActivity {
         String savedText = preferences.getString("savedText", "");
         inputEditText.setText(savedText);
 
+        String submitText = getString(R.string.submit);
+        String saveText = getString(R.string.save);
 
+        triviaBinding.saveButton.setText(saveText);
         triviaBinding.saveButton.setOnClickListener(clk-> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -113,89 +119,23 @@ public class TriviaActivity extends AppCompatActivity {
 
 
         });
-
+        triviaBinding.buttonGeography.setText(getString(R.string.geography));
         triviaBinding.buttonGeography.setOnClickListener( click -> {
             String url = "https://opentdb.com/api.php?amount=10&category=22&type=multiple";
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                     (response) -> {
                         try {
-                            //JSONObject coord = response.getJSONObject("coord");
-                            JSONArray results = response.getJSONArray("results");
-                            int length = results.length();
-
-                            for(int i=0 ; i < length; i++){
-                                JSONObject question = results.getJSONObject(i);
-                                String questionString = question.getString("question");
-                                String correctAnswer = question.getString("correct_answer");
-                                JSONArray incorrectAs = question.getJSONArray("incorrect_answers");
-                                int incorrectLength = incorrectAs.length();
-                                ArrayList<String> incorrectTexts = new ArrayList<>();
-                                for (int j =0; j< incorrectLength; j++){
-                                    incorrectTexts.add(incorrectAs.getString(j) );
-                                }
-
-                                String[] choices = new String[4];
-                                choices[0] = correctAnswer;
-                                for (int k = 1; k < 4; k++) {
-                                    choices[k] = incorrectTexts.get(k - 1);
-                                }
-
-                                runOnUiThread(() -> {
-                                    triviaBinding.totalQuestion.setText("Total Question"+length);
-                                    triviaBinding.totalQuestion.setVisibility(View.VISIBLE);
-                                    triviaBinding.question.setText(questionString);
-                                    triviaBinding.question.setVisibility(View.VISIBLE);
-                                    triviaBinding.ansA.setText(choices[0]);
-                                    triviaBinding.ansA.setVisibility(View.VISIBLE);
-                                    triviaBinding.ansB.setText(choices[1]);
-                                    triviaBinding.ansB.setVisibility(View.VISIBLE);
-                                    triviaBinding.ansC.setText(choices[2]);
-                                    triviaBinding.ansC.setVisibility(View.VISIBLE);
-                                    triviaBinding.ansD.setText(choices[3]);
-                                    triviaBinding.ansD.setVisibility(View.VISIBLE);
-
-
-
-
-                                });
-                                    /*String allAnswers = correctAnswer + ", " + TextUtils.join(", ", incorrectTexts);
-                                    String displayText = "Question: " + questionSTring+ "\nAnswers: " + allAnswers;
-                                    runOnUiThread(() -> {
-                                        triviaBinding.questiondisplay.setText(displayText);
-                                        triviaBinding.questiondisplay.setVisibility(View.VISIBLE);
-                                    });*/
-
-            /*                    runOnUiThread( (  )  -> {
-
-                                    binding.temp.setText("The current temperature is " + current);
-                                    binding.temp.setVisibility(View.VISIBLE);
-
-                                    binding.minTemp.setText("The min temperature is " + min);
-                                    binding.minTemp.setVisibility(View.VISIBLE);
-
-                                    binding.maxTemp.setText("The max temperature is " + max);
-                                    binding.maxTemp.setVisibility(View.VISIBLE);
-
-                                    binding.humidity.setText("The humidity is " + humidity);
-                                    binding.humidity.setVisibility(View.VISIBLE);
-
-                                    binding.icon.setImageBitmap(bitmap);
-                                    binding.icon.setVisibility(View.VISIBLE);
-
-
-
-                                    binding.description.setText("The descripition is " + description);
-                                    binding.description.setVisibility(View.VISIBLE);*/}
-
+                            results = response.getJSONArray("results");
+                            fetchNextQuestion( currentQuestionIndex);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-                    }, // call this for success
-                    (error)-> {
-                        int i =0;
-                    } );
-            // call this for error
+                    },
+                    (error) -> {
+                        int i = 0;
+                        // Handle error if necessary
+                    });            // call this for error
             queue.add(request); //send request to server
 
 
@@ -228,18 +168,69 @@ public class TriviaActivity extends AppCompatActivity {
             }
         });
 
-
+        triviaBinding.submitBtn.setText(submitText);
         triviaBinding.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //handleSubmitButtonClicked();
+                if (!TextUtils.isEmpty(selectedAnswer)) {
+                    if (selectedAnswer.equals(correctAnswer)) {
+                        // Increment score if the answer is correct
+                        score++;
+                    }
+                    currentQuestionIndex++;
+                    fetchNextQuestion( currentQuestionIndex);
+                } else {
+                    Toast.makeText(TriviaActivity.this, "Please select an answer.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        //triviaBinding.totalQuestion.getText();
-        //loadNewQuestion();
+
     }
 
+    private void fetchNextQuestion(int currentQuestionIndex) {
+        try {
+            if (currentQuestionIndex < results.length()) {
+                JSONObject question = results.getJSONObject(currentQuestionIndex);
+                String questionString = question.getString("question");
+                correctAnswer = question.getString("correct_answer"); // Correct answer is assigned to the class-level variable
+               // String correctAnswer = question.getString("correct_answer");
+                JSONArray incorrectAs = question.getJSONArray("incorrect_answers");
+                int incorrectLength = incorrectAs.length();
+                ArrayList<String> incorrectTexts = new ArrayList<>();
+                for (int j = 0; j < incorrectLength; j++) {
+                    incorrectTexts.add(incorrectAs.getString(j));
+                }
+
+                String[] choices = new String[4];
+                choices[0] = correctAnswer;
+                for (int k = 1; k < 4; k++) {
+                    choices[k] = incorrectTexts.get(k - 1);
+                }
+
+                runOnUiThread(() -> {
+                    totalQuestionsTextView.setText("Total Question: " + results.length());
+                    questionTextView.setText(questionString);
+                    ansA.setText(choices[0]);
+                    ansB.setText(choices[1]);
+                    ansC.setText(choices[2]);
+                    ansD.setText(choices[3]);
+                    selectedAnswer = "";
+                    ansA.setBackgroundColor(Color.WHITE);
+                    ansB.setBackgroundColor(Color.WHITE);
+                    ansC.setBackgroundColor(Color.WHITE);
+                    ansD.setBackgroundColor(Color.WHITE);
+                });
+            } else {
+                // Handle the end of trivia (no more questions)
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "End of trivia. Your score: " + score, Toast.LENGTH_LONG).show();
+                });
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private void handleChoiceButtonClick(Button clickedButton) {
         triviaBinding.ansA.setBackgroundColor(Color.WHITE);

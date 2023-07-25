@@ -11,6 +11,9 @@
     <string name="currencyAmount">Amount</string>
     <string name="help">Need Help?</string>
 
+    <string name="submit">Submit</string>
+    <string name="save">Save</string>
+    <string name="geography">Geography</string>
     <string name="help_trivia">1. Input your name and save it; 2. Start to choose the answer for each question and submit; 3. After you finish all question you can see the score this time. </string>
 
 
