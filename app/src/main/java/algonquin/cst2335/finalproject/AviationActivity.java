@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -15,11 +18,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import algonquin.cst2335.finalproject.databinding.ActivityAviationBinding;
 import algonquin.cst2335.finalproject.databinding.ActivityBearBinding;
@@ -29,41 +49,44 @@ public class AviationActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "MyPrefs";
     private static final String KEY_TEXT = "textInput";
-    private EditText airportCode;
-
-    private static final String BASE_URL = "https://api.aviationstack.com/v1/flights";
-    private static final String ACCESS_KEY = "ed55a3cfd604d3ba99660f9d1d88c323";
-    private static final String AIRPORT_CODE_KEY = "dep_iata";
-
+    protected EditText airportCode;
+    protected RequestQueue queue = null;
     private RecyclerView recyclerView;
-    /*
+
     private FlightAdapter flightAdapter;
-    private List<Flight> flightList;*/
+    private List<Flight> flightList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-
-        binding = ActivityAviationBinding.inflate(getLayoutInflater());
-        setSupportActionBar(binding.myToolbar);
-        setContentView(binding.getRoot());
-
-        //setContentView(R.layout.activity_aviation);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        /*
-        flightList = new ArrayList<>();
-        flightAdapter = new FlightAdapter(this, flightList);
-        recyclerView.setAdapter(flightAdapter);*/
-
+        setContentView(R.layout.activity_aviation);
 
         airportCode = findViewById(R.id.editText);
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String savedText = prefs.getString(KEY_TEXT, "");
         airportCode.setText(savedText);
 
+        flightList = new ArrayList<>();
+        queue = Volley.newRequestQueue(this);
+        recyclerView = findViewById(R.id.recyclerView);
+
+        //set RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        binding = ActivityAviationBinding.inflate(getLayoutInflater());
+        setSupportActionBar(binding.myToolbar);
+        setContentView(binding.getRoot());
+
         Button searchButton = findViewById(R.id.button);
+
+        //bind RecyclerView
+        flightAdapter = new FlightAdapter(flightList, flight -> {
+            // 处理航班列表项点击事件
+            Toast.makeText(AviationActivity.this, "Click flight" + flight.getFlightNumber(), Toast.LENGTH_SHORT).show();
+        });
+        recyclerView.setAdapter(flightAdapter);
+
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,16 +96,48 @@ public class AviationActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString(KEY_TEXT, inputText);
                 editor.apply();
-/*
-                if (!TextUtils.isEmpty(inputText)) {
-                    fetchFlights(inputText);
-                } else {
-                    Toast.makeText(AviationActivity.this, "Please enter an airport code.", Toast.LENGTH_SHORT).show();
-                }
 
- */
+               String url = "https://api.aviationstack.com/v1/flights?access_key="
+                       + "edf8ac1275ff1eef1c96f37cbc64083"+"&dep_iata="
+                       + inputText.toUpperCase();
+
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                        (response) -> {
+                            try {
+                                JSONArray data=response.getJSONArray("data");
+                                int len=data.length();
+                                for (int i = 0; i < len; i++) {
+                                    JSONObject thisObj = data.getJSONObject (i) ;
+                                    JSONObject departure = thisObj.getJSONObject( "departure");
+                                    JSONObject arrival = thisObj.getJSONObject( "arrival");
+                                    JSONObject flight = thisObj.getJSONObject( "flight");
+                                    String flightNumber=flight.getString("number");
+                                    String departure_airport = departure.getString("airport");
+                                    String destination_airport = arrival.getString("airport");
+                                    String terminal = departure.getString("terminal");
+                                    String status = thisObj.getString("flight_status");
+                                    String gate = departure.getString(  "gate");
+                                    int delay= departure.getInt("delay");
+
+                                    Flight flightObject = new Flight(flightNumber, destination_airport);
+                                    flightList.add(flightObject);
+                                }
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                            flightAdapter.notifyDataSetChanged();
+
+                        }, // call this for success
+                        (error)-> {
+                            Toast.makeText(AviationActivity.this, "Request failed:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        } );
+                // call this for error
+                queue.add(request); //send request to server
+
             }
-        });
+
+            });
 
 
         Button secondPageButton = findViewById(R.id.button4);
@@ -95,37 +150,7 @@ public class AviationActivity extends AppCompatActivity {
         });
 
     }
-/*
-    private void fetchFlights(String airportCode) {
-        String url = BASE_URL + "?access_key=" + ACCESS_KEY + "&" + AIRPORT_CODE_KEY + "=" + airportCode;
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                response -> {
-                    // Parse the JSON response and populate the flightList
-                    flightList.clear();
-                    JSONArray flightsArray = response.optJSONArray("data");
-                    if (flightsArray != null) {
-                        for (int i = 0; i < flightsArray.length(); i++) {
-                            JSONObject flightObject = flightsArray.optJSONObject(i);
-                            if (flightObject != null) {
-                                String destination = flightObject.optString("flight_date");
-                                String terminal = flightObject.optString("departure");
-                                String gate = flightObject.optString("arrival");
-                                String delay = flightObject.optString("flight_status");
-                                Flight flight = new Flight(destination, terminal, gate, delay);
-                                flightList.add(flight);
-                            }
-                        }
-                        flightAdapter.notifyDataSetChanged();
-                    }
-                },
-                error -> {
-                    Toast.makeText(this, "Error retrieving flights: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                });
 
-        // Add the request to the RequestQueue
-        VolleySingleton.getInstance(this).getRequestQueue().add(request);
-    }
-*/
 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
