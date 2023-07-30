@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -221,11 +222,16 @@ public class TriviaActivity extends AppCompatActivity {
                     ansB.setBackgroundColor(Color.WHITE);
                     ansC.setBackgroundColor(Color.WHITE);
                     ansD.setBackgroundColor(Color.WHITE);
+
+                    Log.d("TriviaActivity", "Next question fetched. Index: " + currentQuestionIndex);
                 });
             } else {
                 // Handle the end of trivia (no more questions)
                 runOnUiThread(() -> {
                     Toast.makeText(this, "End of trivia. Your score: " + score, Toast.LENGTH_LONG).show();
+                    showEndOfTriviaDialog();
+
+                    Log.d("TriviaActivity", "End of trivia. Score: " + score);
                 });
             }
         } catch (JSONException e) {
@@ -301,5 +307,49 @@ public class TriviaActivity extends AppCompatActivity {
 
         return true;
     }
+
+
+    private void showEndOfTriviaDialog() {
+        // Show a dialog to ask for the user's name when trivia ends
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Trivia End");
+        builder.setMessage("Please enter your name:");
+
+        final EditText input = new EditText(this);
+        builder.setView(input);
+
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String name = input.getText().toString().trim();
+            if (!TextUtils.isEmpty(name)) {
+                // Save the name and score to the database
+                saveScoreToDatabase(name, score);
+            }
+            // Show the high scores activity
+            showHighScoresActivity();
+        });
+
+        builder.setCancelable(false);
+        builder.show();
+    }
+
+    private void saveScoreToDatabase(String name, int score) {
+        // Save the user's name and score to the database (use your database implementation)
+        // For example, you can use SQLiteOpenHelper or Room database
+        // Here, we assume you have a ScoreDatabaseHelper class to handle database operations
+        ScoreDatabaseHelper databaseHelper = new ScoreDatabaseHelper(this);
+        databaseHelper.addScore(new Score(name, score));
+    }
+
+    private void showHighScoresActivity() {
+        // Launch the HighScoresActivity
+        Log.d("TriviaActivity", "Launching HighScoresActivity");
+        Intent highScoresIntent = new Intent(TriviaActivity.this, HighScoresActivity.class);
+        startActivity(highScoresIntent);
+    }
+
+
+
+
+
 
 }
