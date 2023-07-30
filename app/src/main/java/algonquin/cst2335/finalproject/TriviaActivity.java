@@ -60,6 +60,7 @@ public class TriviaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         triviaBinding = ActivityTriviaBinding.inflate(getLayoutInflater());
         setContentView(triviaBinding.getRoot());
