@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class HighScoresActivity extends AppCompatActivity {
+public class HighScoresActivity extends AppCompatActivity implements HighScoresAdapter.OnItemClickListener{
 
     private RecyclerView recyclerView;
     private HighScoresAdapter adapter;
@@ -19,16 +19,33 @@ public class HighScoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_scores);
 
+//        recyclerView = findViewById(R.id.recyclerViewHighScores);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        // Fetch the top 10 high scores from the database
+//        highScoresList = fetchTop10HighScores();
+//
+//        // Create and set the adapter with the high scores list
+//        adapter = new HighScoresAdapter(highScoresList);
+//        recyclerView.setAdapter(adapter);
+
+        // Call setupRecyclerView() to set up the RecyclerView and adapter
+        setupRecyclerView();
+
+    }
+
+    private void setupRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewHighScores);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Fetch the top 10 high scores from the database
         highScoresList = fetchTop10HighScores();
 
-        // Create and set the adapter with the high scores list
-        adapter = new HighScoresAdapter(highScoresList);
+        // Create and set the adapter with the high scores list and the item click listener
+        adapter = new HighScoresAdapter(highScoresList, this);
         recyclerView.setAdapter(adapter);
     }
+
 
     private List<Score> fetchTop10HighScores() {
         // Fetch the top 10 high scores from the database (use your database implementation)
@@ -37,4 +54,17 @@ public class HighScoresActivity extends AppCompatActivity {
         ScoreDatabaseHelper databaseHelper = new ScoreDatabaseHelper(this);
         return databaseHelper.getTop10Scores();
     }
+
+    public void onItemClick(Score score) {
+        // Handle item click here, e.g., delete the score from the database and update the RecyclerView
+        ScoreDatabaseHelper databaseHelper = new ScoreDatabaseHelper(this);
+        databaseHelper.deleteScore(score.getId());
+
+        // Remove the score from the list
+        highScoresList.remove(score);
+
+        // Notify the adapter about the item removal
+        adapter.notifyDataSetChanged();
+    }
+
 }

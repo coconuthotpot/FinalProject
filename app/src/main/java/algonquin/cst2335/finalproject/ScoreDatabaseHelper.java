@@ -49,6 +49,15 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
         database.close();
     }
 
+    public void deleteScore(int id) {
+        SQLiteDatabase database = getWritableDatabase();
+        String selection = COLUMN_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(id)};
+        database.delete(TABLE_SCORES, selection, selectionArgs);
+        database.close();
+    }
+
+
     // Method to fetch the top 10 high scores from the database
     public List<Score> getTop10Scores() {
         List<Score> scores = new ArrayList<>();
