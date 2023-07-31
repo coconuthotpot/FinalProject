@@ -23,24 +23,6 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         this.onItemClickListener = onItemClickListener;
     }
 
-    @NonNull
-    @Override
-    public FlightViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_aviation, parent, false);
-        return new FlightViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
-        Flight flight = flightList.get(position);
-        holder.bind(flight, onItemClickListener);
-    }
-
-    @Override
-    public int getItemCount() {
-        return flightList.size();
-    }
-
     public static class FlightViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewFlightNumber;
         private TextView textViewDestination;
@@ -63,5 +45,25 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
             });
         }
     }
+
+    @NonNull
+    @Override
+    public FlightViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_flight, parent, false);
+        return new FlightViewHolder(view);
+    }
+    @Override
+    public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
+        Flight flight = flightList.get(position);
+        holder.bind(flight, onItemClickListener);
+        holder.textViewFlightNumber.setText(flight.getFlightNumber());
+        holder.textViewDestination.setText(flight.getDestination_airport());
+    }
+
+    @Override
+    public int getItemCount() {
+        return flightList.size();
+    }
+
 }
 

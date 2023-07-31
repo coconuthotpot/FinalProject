@@ -6,25 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.Bundle;
-import android.text.TextUtils;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,16 +29,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 
 import algonquin.cst2335.finalproject.databinding.ActivityAviationBinding;
-import algonquin.cst2335.finalproject.databinding.ActivityBearBinding;
 
 public class AviationActivity extends AppCompatActivity {
     ActivityAviationBinding binding;
@@ -67,7 +59,6 @@ public class AviationActivity extends AppCompatActivity {
         String savedText = prefs.getString(KEY_TEXT, "");
         airportCode.setText(savedText);
 
-        flightList = new ArrayList<>();
         queue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -75,82 +66,85 @@ public class AviationActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         binding = ActivityAviationBinding.inflate(getLayoutInflater());
-        setSupportActionBar(binding.myToolbar);
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.myToolbar);
 
-        Button searchButton = findViewById(R.id.button);
-
+        flightList = new ArrayList<>();
         //bind RecyclerView
         flightAdapter = new FlightAdapter(flightList, flight -> {
-            // 处理航班列表项点击事件
             Toast.makeText(AviationActivity.this, "Click flight" + flight.getFlightNumber(), Toast.LENGTH_SHORT).show();
         });
         recyclerView.setAdapter(flightAdapter);
 
+        Button searchButton = findViewById(R.id.button);
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                String inputText = airportCode.getText().toString();
-                SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-                editor.putString(KEY_TEXT, inputText);
-                editor.apply();
 
-               String url = "https://api.aviationstack.com/v1/flights?access_key="
-                       + "edf8ac1275ff1eef1c96f37cbc64083"+"&dep_iata="
-                       + inputText.toUpperCase();
+//show in RecycleView -ItemView
+        searchButton.setOnClickListener(view -> {
 
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                        (response) -> {
-                            try {
-                                JSONArray data=response.getJSONArray("data");
-                                int len=data.length();
-                                for (int i = 0; i < len; i++) {
-                                    JSONObject thisObj = data.getJSONObject (i) ;
-                                    JSONObject departure = thisObj.getJSONObject( "departure");
-                                    JSONObject arrival = thisObj.getJSONObject( "arrival");
-                                    JSONObject flight = thisObj.getJSONObject( "flight");
-                                    String flightNumber=flight.getString("number");
-                                    String departure_airport = departure.getString("airport");
-                                    String destination_airport = arrival.getString("airport");
-                                    String terminal = departure.getString("terminal");
-                                    String status = thisObj.getString("flight_status");
-                                    String gate = departure.getString(  "gate");
-                                    int delay= departure.getInt("delay");
+            String inputText = airportCode.getText().toString();
+            Log.d("AviationActivity", "Input Text: " + inputText);
+            SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+            editor.putString(KEY_TEXT, inputText);
+            editor.apply();
 
-                                    Flight flightObject = new Flight(flightNumber, destination_airport);
-                                    flightList.add(flightObject);
-                                }
+           String url = "http://api.aviationstack.com/v1/flights?access_key=b7fb04e522e349937e40617cd422e9b1&dep_iata="
+                   + URLEncoder.encode(inputText);
 
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                    (response) -> {
+                        Log.d("AviationActivity", "Response: " + response.toString());
+                        try {
+                            JSONArray data=response.getJSONArray("data");
+                            Log.d("AviationActivity", "Data Array: " + data.toString());
+
+                            flightList.clear();
+                            int len=data.length();
+                            for (int i = 0; i < 3; i++) {
+                                JSONObject thisObj = data.getJSONObject (i) ;
+                                Log.d("AviationActivity", "Flight Object " + i + ": " + thisObj.toString());
+
+                                JSONObject departure = thisObj.getJSONObject( "departure");
+                                JSONObject arrival = thisObj.getJSONObject( "arrival");
+                                JSONObject flight = thisObj.getJSONObject( "flight");
+                                String flightNumber=flight.getString("number");
+                                String departure_airport = departure.getString("airport");
+                                String destination_airport = arrival.getString("airport");
+                                String terminal = departure.getString("terminal");
+                                String status = thisObj.getString("flight_status");
+                                String gate = departure.getString(  "gate");
+                                int delay = departure.isNull("delay") ? 0 : departure.getInt("delay");
+
+                                Flight flightObject = new Flight(flightNumber, destination_airport);
+                                flightList.add(flightObject);
                             }
-                            flightAdapter.notifyDataSetChanged();
+                            runOnUiThread(() -> {
+                                flightAdapter.notifyDataSetChanged();
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(AviationActivity.this, "Error parsing JSON response", Toast.LENGTH_SHORT).show();
+                        }
 
-                        }, // call this for success
-                        (error)-> {
-                            Toast.makeText(AviationActivity.this, "Request failed:" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                        } );
-                // call this for error
-                queue.add(request); //send request to server
+                    }, // call this for success
+                    (error)-> {
+                        Log.e("AviationActivity", "Error: " + error.getMessage());
+                        Toast.makeText(AviationActivity.this, "Request failed:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    } );
+            // call this for error
+            queue.add(request); //send request to server
 
-            }
+        });
 
-            });
 
 
         Button secondPageButton = findViewById(R.id.button4);
-        secondPageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
-                startActivity(intent);
-            }
+        secondPageButton.setOnClickListener(view -> {
+            Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
+            startActivity(intent);
         });
-
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
