@@ -28,6 +28,10 @@ public class HighScoresAdapter extends RecyclerView.Adapter<HighScoresAdapter.Sc
         this.itemClickListener = itemClickListener;
     }
 
+    public void setHighScoresList(List<Score> highScoresList) {
+        this.highScoresList = highScoresList;
+    }
+
     @NonNull
     @Override
     public HighScoresAdapter.ScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

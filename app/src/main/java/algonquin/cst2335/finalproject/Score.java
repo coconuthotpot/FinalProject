@@ -10,13 +10,7 @@ public class Score {
     @ColumnInfo(name = "name")
     private String name;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @ColumnInfo(name="score")
     private int score;
@@ -26,6 +20,7 @@ public class Score {
     public int id;
 
     public Score(String name, int score) {
+
         this.name = name;
         this.score = score;
     }
@@ -44,5 +39,12 @@ public class Score {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
