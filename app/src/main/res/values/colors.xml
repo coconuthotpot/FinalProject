@@ -7,4 +7,5 @@
     <color name="currencyHeaderFont">#FFFDEA</color>
     <color name="currencyBG">#EBF1E6</color>
     <color name="currencyRecordBG">#B4DFD1</color>
+    <color name="yellow">#FFEB3B</color>
 </resources>
