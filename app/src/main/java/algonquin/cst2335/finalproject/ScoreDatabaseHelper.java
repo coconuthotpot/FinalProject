@@ -62,7 +62,8 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
 
     // Method to fetch the top 10 high score from the database
     public List<Score> getTop10score() {
-        List<Score> score = new ArrayList<>();
+//        List<Score> score = new ArrayList<>();
+        List<Score> scoreList = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
         Cursor cursor = database.query(
                 TABLE_score,
@@ -80,14 +81,16 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
                 @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
                 @SuppressLint("Range") int scoreValue = cursor.getInt(cursor.getColumnIndex(COLUMN_SCORE));
-
+                Score score = new Score(name, scoreValue);
                 Log.d("ScoreDatabaseHelper", "Id: " + id + ", Name: " + name + ", Score: " + scoreValue);
-                score.add(new Score(name, scoreValue));
+//                score.add(new Score(name, scoreValue));
+                score.setId(id);
+                scoreList.add(score);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         database.close();
-        return score;
+        return scoreList;
     }
 }
