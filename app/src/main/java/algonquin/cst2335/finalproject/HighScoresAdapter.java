@@ -3,7 +3,6 @@ package algonquin.cst2335.finalproject;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +34,7 @@ public class HighScoresAdapter extends RecyclerView.Adapter<HighScoresAdapter.Sc
     @NonNull
     @Override
     public HighScoresAdapter.ScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_score, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trivia_item_score, parent, false);
         return new ScoreViewHolder(view);
     }
 

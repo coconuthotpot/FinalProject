@@ -84,8 +84,13 @@ public class TriviaActivity extends AppCompatActivity {
         String savedText = preferences.getString("savedText", "");
         inputEditText.setText(savedText);
 
+        triviaBinding.totalQuestion.setText(getString(R.string.total_question) );
+        triviaBinding.textCategory.setText(getString(R.string.textCategory));
+        triviaBinding.textQuestionAmount.setText(getString(R.string.textQuestionAmount));
+
         String submitText = getString(R.string.submit);
         String saveText = getString(R.string.save);
+
 
         triviaBinding.saveButton.setText(saveText);
         triviaBinding.saveButton.setOnClickListener(clk-> {
@@ -108,7 +113,8 @@ public class TriviaActivity extends AppCompatActivity {
             builder.create().show();
         });
 
-        triviaBinding.buttonSports.setText("Sports");
+
+        triviaBinding.buttonSports.setText(getString(R.string.sports));
         triviaBinding.buttonSports.setOnClickListener( click -> {
             String amount = inputEditText.getText().toString();
             String url = "https://opentdb.com/api.php?amount="+amount+"&category=21&type=multiple";
@@ -222,7 +228,10 @@ public class TriviaActivity extends AppCompatActivity {
                 }
 
                 runOnUiThread(() -> {
-                    totalQuestionsTextView.setText("Total Question: " + results.length());
+
+//                    totalQuestionsTextView.setText("Total Question: " + results.length());
+                    totalQuestionsTextView.setText(getString(R.string.total_question) + ": " + results.length());
+
                     questionTextView.setText(questionString);
                     ansA.setText(choices[0]);
                     ansB.setText(choices[1]);
@@ -332,11 +341,23 @@ public class TriviaActivity extends AppCompatActivity {
         builder.setPositiveButton("Save", (dialog, which) -> {
             String name = input.getText().toString().trim();
             if (!TextUtils.isEmpty(name)) {
+                // Check if the name already exists in the database
+                if (!isNameAlreadyExist(name)) {
                 // Save the name and score to the database
                 saveScoreToDatabase(name, score);
+                    // Show the high scores activity
+                    showHighScoresActivity();
+                } else {
+                    Toast.makeText(this, "Name already exists. Please enter a different name.", Toast.LENGTH_SHORT).show();
+                    // Show the dialog again to ask for a different name
+                    showEndOfTriviaDialog();
+                }
+            }   else {
+                Toast.makeText(this, "Please enter a valid name.", Toast.LENGTH_SHORT).show();
+                // Show the dialog again to ask for a valid name
+                showEndOfTriviaDialog();
             }
-            // Show the high scores activity
-            showHighScoresActivity();
+
         });
 
         builder.setCancelable(false);
@@ -359,7 +380,15 @@ public class TriviaActivity extends AppCompatActivity {
     }
 
 
-
+    private boolean isNameAlreadyExist(String name) {
+        // Implement a function to check if the name already exists in the database
+        // You should query your database here to check if the name already exists
+        // Return true if the name already exists, false otherwise
+        // For example, you can use SQLiteOpenHelper or Room database to check for duplicates
+        // Here, we assume you have a ScoreDatabaseHelper class to handle database operations
+        ScoreDatabaseHelper databaseHelper = new ScoreDatabaseHelper(this);
+        return databaseHelper.isNameAlreadyExist(name);
+    }
 
 
 

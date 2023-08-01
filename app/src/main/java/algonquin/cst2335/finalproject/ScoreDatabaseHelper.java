@@ -59,6 +59,26 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public boolean isNameAlreadyExist(String name) {
+        SQLiteDatabase database = getReadableDatabase();
+        String selection = COLUMN_NAME + "=?";
+        String[] selectionArgs = {name};
+        Cursor cursor = database.query(
+                TABLE_score,
+                new String[]{COLUMN_NAME},
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        boolean nameExists = cursor.moveToFirst();
+        cursor.close();
+        database.close();
+        return nameExists;
+    }
+
 
     // Method to fetch the top 10 high score from the database
     public List<Score> getTop10score() {
@@ -93,4 +113,5 @@ public class ScoreDatabaseHelper extends SQLiteOpenHelper {
         database.close();
         return scoreList;
     }
+
 }

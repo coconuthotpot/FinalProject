@@ -27,14 +27,14 @@ public class HighScoresActivity extends AppCompatActivity {
         public void onItemClick(Score score) {
             AlertDialog.Builder builder = new AlertDialog.Builder(HighScoresActivity.this);
             builder.setTitle("Confirm Deletion");
-            builder.setMessage("Are you sure you want to delete this score?");
+            builder.setMessage("Are you sure you want to delete this score or see the detail of the item?");
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     deleteScore(score);
                 }
             });
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("See Detail", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 showItemDetailFragment(score);
