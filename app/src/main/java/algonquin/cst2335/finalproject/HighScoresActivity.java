@@ -34,7 +34,12 @@ public class HighScoresActivity extends AppCompatActivity {
                     deleteScore(score);
                 }
             });
-            builder.setNegativeButton("No", null);
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showItemDetailFragment(score);
+            }
+            });
             builder.show();
         }
 
@@ -109,5 +114,14 @@ public class HighScoresActivity extends AppCompatActivity {
     }
 
 
+
+    private void showItemDetailFragment(Score score) {
+        // Create the fragment instance and pass the selected Score as an argument
+        TriviaDetailsFragment fragment = new TriviaDetailsFragment(score);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLocation, fragment) // Replace 'fragmentContainer' with the ID of the container in your activity layout
+                .addToBackStack(null)
+                .commit();
+    }
 
 }
