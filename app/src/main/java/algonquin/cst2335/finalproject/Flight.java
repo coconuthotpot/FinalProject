@@ -4,9 +4,14 @@ public class Flight {
     private String flightNumber;
     private String destination_airport;
 
-    public Flight(String flightNumber, String destination_airport) {
+    private String departure_airport;
+
+    public Flight(String flightNumber, String departure_airport,String destination_airport) {
         this.flightNumber=flightNumber;
+        this.departure_airport=departure_airport;
         this.destination_airport=destination_airport;
+
+
     }
 
     public String getFlightNumber() {
@@ -26,6 +31,13 @@ public class Flight {
     }
 
 
+    public String getDeparture_airport() {
+        return departure_airport;
+    }
+
+    public void setDeparture_airport(String departure_airport) {
+        this.departure_airport = departure_airport;
+    }
 
 }
 

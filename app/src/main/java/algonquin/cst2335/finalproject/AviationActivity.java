@@ -52,7 +52,12 @@ public class AviationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aviation);
+
+        binding = ActivityAviationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+//        setContentView(R.layout.activity_aviation);
+
 
         airportCode = findViewById(R.id.editText);
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -60,13 +65,14 @@ public class AviationActivity extends AppCompatActivity {
         airportCode.setText(savedText);
 
         queue = Volley.newRequestQueue(this);
-        recyclerView = findViewById(R.id.recyclerView);
+//        recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView = binding.recyclerView;
 
         //set RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        binding = ActivityAviationBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
         setSupportActionBar(binding.myToolbar);
 
         flightList = new ArrayList<>();
@@ -89,7 +95,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=b7fb04e522e349937e40617cd422e9b1&dep_iata="
+           String url = "http://api.aviationstack.com/v1/flights?access_key=4a61f8bdff5bf354ca7ab5ff7b77cbd7&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -101,7 +107,7 @@ public class AviationActivity extends AppCompatActivity {
 
                             flightList.clear();
                             int len=data.length();
-                            for (int i = 0; i < 3; i++) {
+                            for (int i = 0; i < 5; i++) {
                                 JSONObject thisObj = data.getJSONObject (i) ;
                                 Log.d("AviationActivity", "Flight Object " + i + ": " + thisObj.toString());
 
@@ -116,7 +122,7 @@ public class AviationActivity extends AppCompatActivity {
                                 String gate = departure.getString(  "gate");
                                 int delay = departure.isNull("delay") ? 0 : departure.getInt("delay");
 
-                                Flight flightObject = new Flight(flightNumber, destination_airport);
+                                Flight flightObject = new Flight(flightNumber, departure_airport,destination_airport);
                                 flightList.add(flightObject);
                             }
                             runOnUiThread(() -> {

@@ -27,15 +27,16 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         private TextView textViewFlightNumber;
         private TextView textViewDestination;
 
+        private  TextView textVIewDeparture;
+
         public FlightViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewFlightNumber = itemView.findViewById(R.id.textViewFlightNumber);
             textViewDestination = itemView.findViewById(R.id.textViewDestination);
+            textVIewDeparture= itemView.findViewById(R.id.textViewDeparture);
         }
 
         public void bind(final Flight flight, final OnItemClickListener listener) {
-            textViewFlightNumber.setText("Flight Number:" + flight.getFlightNumber());
-            textViewDestination.setText("Destination Airport:" + flight.getDestination_airport());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -56,8 +57,10 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
     public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
         Flight flight = flightList.get(position);
         holder.bind(flight, onItemClickListener);
-        holder.textViewFlightNumber.setText(flight.getFlightNumber());
-        holder.textViewDestination.setText(flight.getDestination_airport());
+        holder.textViewFlightNumber.setText("Flight Number:" + flight.getFlightNumber());
+        holder.textVIewDeparture.setText("Departure Airport"+ flight.getDeparture_airport());
+        holder.textViewDestination.setText("Destination Airport:" + flight.getDestination_airport());
+
     }
 
     @Override

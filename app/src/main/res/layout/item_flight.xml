@@ -15,9 +15,18 @@
         android:textSize="16sp"/>
 
     <TextView
+        android:id="@+id/textViewDeparture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Departure Airport:"
+        android:textSize="14sp"/>
+
+    <TextView
         android:id="@+id/textViewDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Destination Airport:"
         android:textSize="14sp"/>
+
+
 </LinearLayout>
