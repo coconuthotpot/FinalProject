@@ -68,16 +68,6 @@ public class TriviaActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         setSupportActionBar(triviaBinding.triviatoolbar);
 
-        recyclerView = triviaBinding.triviaRecycleView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Create a list of items to display in the RecyclerView
-        List<String> items = new ArrayList<>();
-        // Add your trivia items to the list
-
-        // Create the adapter with the list of items
-        adapter = new TriviaList(items);
-        recyclerView.setAdapter(adapter);
 
         EditText inputEditText = triviaBinding.inputEditText;
         Button saveButton = triviaBinding.saveButton;
@@ -101,13 +91,13 @@ public class TriviaActivity extends AppCompatActivity {
         triviaBinding.saveButton.setOnClickListener(clk-> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Are you sure you want to save this name?");
+            builder.setMessage("Are you sure you want to choose choose this number of questions?");
             builder.setPositiveButton("Yes", (dialog, click) -> {
                 String userInput = triviaBinding.inputEditText.getText().toString();
 
-                Toast.makeText(this, "Name saved!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Number of questions saved!", Toast.LENGTH_SHORT).show();
 
-                Snackbar.make(triviaBinding.getRoot(), "Your name is: " + userInput, Snackbar.LENGTH_LONG)
+                Snackbar.make(triviaBinding.getRoot(), "Your question number is: " + userInput, Snackbar.LENGTH_LONG)
                         .show();
 
                 editor.putString("savedText", userInput);
@@ -116,14 +106,35 @@ public class TriviaActivity extends AppCompatActivity {
 
             builder.setNegativeButton("No", (dialog2, click2) -> {});
             builder.create().show();
+        });
 
-
-
+        triviaBinding.buttonSports.setText("Sports");
+        triviaBinding.buttonSports.setOnClickListener( click -> {
+            String amount = inputEditText.getText().toString();
+            String url = "https://opentdb.com/api.php?amount="+amount+"&category=21&type=multiple";
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                    (response) -> {
+                        try {
+                            results = response.getJSONArray("results");
+                            fetchNextQuestion( currentQuestionIndex);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    },
+                    (error) -> {
+                        int i = 0;
+                        // Handle error if necessary
+                    });            // call this for error
+            queue.add(request); //send request to server
 
         });
+
+
+
         triviaBinding.buttonGeography.setText(getString(R.string.geography));
         triviaBinding.buttonGeography.setOnClickListener( click -> {
-            String url = "https://opentdb.com/api.php?amount=10&category=22&type=multiple";
+            String amount = inputEditText.getText().toString();
+            String url = "https://opentdb.com/api.php?amount="+amount+"&category=22&type=multiple";
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                     (response) -> {
