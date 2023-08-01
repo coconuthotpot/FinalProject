@@ -56,8 +56,6 @@ public class AviationActivity extends AppCompatActivity {
         binding = ActivityAviationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        setContentView(R.layout.activity_aviation);
-
 
         airportCode = findViewById(R.id.editText);
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -65,7 +63,6 @@ public class AviationActivity extends AppCompatActivity {
         airportCode.setText(savedText);
 
         queue = Volley.newRequestQueue(this);
-//        recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView = binding.recyclerView;
 
@@ -77,16 +74,15 @@ public class AviationActivity extends AppCompatActivity {
 
         flightList = new ArrayList<>();
         //bind RecyclerView
-        flightAdapter = new FlightAdapter(flightList, flight -> {
-            Toast.makeText(AviationActivity.this, "Click flight" + flight.getFlightNumber(), Toast.LENGTH_SHORT).show();
-        });
         recyclerView.setAdapter(flightAdapter);
+
+        // 当航班列表项被点击时，启动FlightDetailActivity并传递航班信息
+
 
         Button searchButton = findViewById(R.id.button);
 
 
-
-//show in RecycleView -ItemView
+        //show in RecycleView -ItemView
         searchButton.setOnClickListener(view -> {
 
             String inputText = airportCode.getText().toString();
@@ -117,12 +113,11 @@ public class AviationActivity extends AppCompatActivity {
                                 String flightNumber=flight.getString("number");
                                 String departure_airport = departure.getString("airport");
                                 String destination_airport = arrival.getString("airport");
-                                String terminal = departure.getString("terminal");
-                                String status = thisObj.getString("flight_status");
+                                String departure_terminal = departure.getString("terminal");
                                 String gate = departure.getString(  "gate");
                                 int delay = departure.isNull("delay") ? 0 : departure.getInt("delay");
 
-                                Flight flightObject = new Flight(flightNumber, departure_airport,destination_airport);
+                                Flight flightObject = new Flight(flightNumber, departure_airport,destination_airport,departure_terminal,gate,delay);
                                 flightList.add(flightObject);
                             }
                             runOnUiThread(() -> {
@@ -143,14 +138,20 @@ public class AviationActivity extends AppCompatActivity {
 
         });
 
-
-
-        Button secondPageButton = findViewById(R.id.button4);
-        secondPageButton.setOnClickListener(view -> {
-            Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
-            startActivity(intent);
-        });
     }
+
+    public void onItemClick(Flight flight) {
+        // Create a new instance of FlightDetailsFragment and pass the selected flight details
+        FlightDetailsFragment fragment = new FlightDetailsFragment(FlightDetails);
+
+        // Use FragmentManager to add the fragment to the activity
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLocation, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    //This is toolbar
 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);

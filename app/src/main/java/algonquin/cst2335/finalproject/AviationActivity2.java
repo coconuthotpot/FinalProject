@@ -13,6 +13,8 @@ import com.google.android.material.snackbar.Snackbar;
 public class AviationActivity2 extends AviationActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aviation2);
 
