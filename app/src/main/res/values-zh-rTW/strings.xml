@@ -37,5 +37,9 @@
     <string name="submit">提交</string>
     <string name="save">儲存</string>
     <string name="geography">地理問題</string>
-    <string name="help_trivia">1. 輸入你的名字並儲存; 2.選擇每題答案並按提交按鈕; 3.完成所有題目後你可以看到這次的分數</string>
+    <string name="sports">運動問題</string>
+    <string name="textQuestionAmount">想回答多少問題</string>
+    <string name="textCategory">請選擇問題類別</string>
+    <string name="total_question">全部問題數量總共是</string>
+    <string name="help_trivia">1. 輸入你想回答問題的數量並儲存; 2.選擇每題答案並按提交按鈕; 3.完成所有題目後你可以看到這次的分數</string>
 </resources>

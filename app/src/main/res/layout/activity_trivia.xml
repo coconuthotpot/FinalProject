@@ -21,11 +21,10 @@
         android:id="@+id/inputEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Please type your name"
+        android:hint="Please enter the number of questions"
         android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/saveButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/triviatoolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/textQuestionAmount" />
 
 
     <Button
@@ -33,24 +32,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        app:layout_constraintBottom_toTopOf="@+id/total_question"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputEditText"
-        app:layout_constraintTop_toBottomOf="@+id/triviatoolbar"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintTop_toTopOf="@+id/inputEditText" />
 
     <TextView
         android:id="@+id/total_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:text="Total Questions "
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/textCategory" />
 
     <TextView
         android:id="@+id/question"
@@ -58,6 +53,7 @@
         android:layout_height="wrap_content"
 
         android:layout_margin="20dp"
+        android:layout_marginTop="108dp"
         android:text="This will be the question"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -66,7 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/total_question" />
-
 
     <Button
         android:id="@+id/ans_A"
@@ -105,26 +100,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ans_B" />
 
+
     <Button
         android:id="@+id/ans_D"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="104dp"
         android:backgroundTint="@color/white"
         android:text="Ans D"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ans_C" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/triviaRecycleView"
-        android:layout_width="118dp"
-        android:layout_height="238dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ans_D" />
-
 
     <Button
         android:id="@+id/submit_btn"
@@ -132,21 +121,43 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/buttonSports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sports"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/triviaRecycleView"
-        app:layout_constraintVertical_bias="0.965" />
+        app:layout_constraintTop_toBottomOf="@+id/textCategory" />
 
     <Button
         android:id="@+id/buttonGeography"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Geography"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/triviaRecycleView"
-        app:layout_constraintTop_toBottomOf="@+id/ans_D" />
+        app:layout_constraintTop_toBottomOf="@+id/textCategory" />
+
+    <TextView
+        android:id="@+id/textQuestionAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The number of questions "
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/triviatoolbar" />
+
+    <TextView
+        android:id="@+id/textCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please select a question topic"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEditText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
