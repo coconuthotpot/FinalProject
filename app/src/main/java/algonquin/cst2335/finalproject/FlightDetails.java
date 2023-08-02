@@ -39,6 +39,10 @@ public class FlightDetails {
         this.id = id;
     }
 
+    public FlightDetails() {
+
+    }
+
     public String getNumber() {
         return number;
     }

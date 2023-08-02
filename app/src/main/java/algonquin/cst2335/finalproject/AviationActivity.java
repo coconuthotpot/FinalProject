@@ -74,10 +74,10 @@ public class AviationActivity extends AppCompatActivity {
 
         flightList = new ArrayList<>();
         //bind RecyclerView
+        flightAdapter = new FlightAdapter(flightList, this::onItemClick);
         recyclerView.setAdapter(flightAdapter);
 
         // 当航班列表项被点击时，启动FlightDetailActivity并传递航班信息
-
 
         Button searchButton = findViewById(R.id.button);
 
@@ -91,7 +91,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=4a61f8bdff5bf354ca7ab5ff7b77cbd7&dep_iata="
+           String url = "http://api.aviationstack.com/v1/flights?access_key=1a8200d258f03364674865b0368f7f12&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -142,7 +142,7 @@ public class AviationActivity extends AppCompatActivity {
 
     public void onItemClick(Flight flight) {
         // Create a new instance of FlightDetailsFragment and pass the selected flight details
-        FlightDetailsFragment fragment = new FlightDetailsFragment(FlightDetails);
+        FlightDetailsFragment fragment = new FlightDetailsFragment(flight.getFlightDetails());
 
         // Use FragmentManager to add the fragment to the activity
         getSupportFragmentManager().beginTransaction()

@@ -71,5 +71,16 @@ public class Flight {
         this.delay = delay;
     }
 
+    public FlightDetails getFlightDetails() {
+        FlightDetails flightDetails = new FlightDetails();
+        flightDetails.setNumber(flightNumber);
+        flightDetails.setDeparture_airport(departure_airport);
+        flightDetails.setDestination_airport(destination_airport);
+        flightDetails.setDeparture_terminal(departure_terminal);
+        flightDetails.setGate(gate);
+        flightDetails.setDelay(delay);
+        return flightDetails;
+    }
 }
+
 

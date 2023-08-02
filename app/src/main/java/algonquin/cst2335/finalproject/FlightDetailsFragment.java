@@ -22,12 +22,12 @@ public class FlightDetailsFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
        FlightDetailsLayoutBinding binding = FlightDetailsLayoutBinding.inflate(inflater);
 
-        binding.flightNumber.setText ( selected.number );
-        binding.departureAirport.setText(selected.departure_airport);
-        binding.arrivalAirport.setText(selected.destination_airport);
-        binding.terminal.setText(selected.departure_terminal);
-        binding.gate.setText(selected.gate);
-        binding.delay.setText(selected.delay);
+        binding.flightNumber.setText ("Flight Number:"+selected.number );
+        binding.departureAirport.setText("Departure Airport:"+selected.departure_airport);
+        binding.arrivalAirport.setText("Destination Airport:"+selected.destination_airport);
+        binding.terminal.setText("Departure Terminal:"+selected.departure_terminal);
+        binding.gate.setText("Gate:"+selected.gate);
+        binding.delay.setText("Delay Time:"+String.valueOf(selected.delay));
         return binding.getRoot ();
     }
 }

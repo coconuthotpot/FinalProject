@@ -38,12 +38,7 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
 
         public void bind(final Flight flight, final OnItemClickListener listener) {
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(flight);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(flight));
         }
     }
 
