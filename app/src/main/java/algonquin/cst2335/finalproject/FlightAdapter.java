@@ -18,6 +18,13 @@ public class FlightAdapter extends RecyclerView.Adapter<FlightAdapter.FlightView
         void onItemClick(Flight flight);
     }
 
+    private List<FlightDetails> flightDetailsList;
+
+    public void setData(List<FlightDetails> flightDetailsList) {
+        this.flightDetailsList = flightDetailsList;
+        notifyDataSetChanged();
+    }
+
     public FlightAdapter(List<Flight> flightList, OnItemClickListener onItemClickListener) {
         this.flightList = flightList;
         this.onItemClickListener = onItemClickListener;

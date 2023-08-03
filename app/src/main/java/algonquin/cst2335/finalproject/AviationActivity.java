@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -47,6 +47,8 @@ public class AviationActivity extends AppCompatActivity {
 
     private FlightAdapter flightAdapter;
     private List<Flight> flightList;
+    private List<FlightDetails> flightDetailsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +81,8 @@ public class AviationActivity extends AppCompatActivity {
 
         // 当航班列表项被点击时，启动FlightDetailActivity并传递航班信息
 
-        Button searchButton = findViewById(R.id.button);
-
+        Button searchButton = findViewById(R.id.search);
+        Button showButton = findViewById(R.id.showList);
 
         //show in RecycleView -ItemView
         searchButton.setOnClickListener(view -> {
@@ -91,7 +93,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=1a8200d258f03364674865b0368f7f12&dep_iata="
+           String url = "http://api.aviationstack.com/v1/flights?access_key=4df1a0c8f71a7cc884ba36e84e591a64&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -138,6 +140,19 @@ public class AviationActivity extends AppCompatActivity {
 
         });
 
+        showButton.setOnClickListener(view -> {
+
+            FlightDatabase database = FlightDatabase.getInstance(this);
+            FlightDetailsDAO flightDetailsDao = database.fDAO();
+
+            // 从数据库中获取所有航班详细信息
+            List<FlightDetails> allFlightDetails = flightDetailsDao.getAllFlight();
+
+            // 更新适配器
+            flightAdapter.setData(allFlightDetails);
+
+        });
+
     }
 
     public void onItemClick(Flight flight) {
@@ -149,7 +164,21 @@ public class AviationActivity extends AppCompatActivity {
                 .replace(R.id.fragmentLocation, fragment)
                 .addToBackStack(null)
                 .commit();
+
+        // Save the flight details to the database in AsyncTask
+       // new SaveFlightDetailsTask().execute(flight);
+
     }
+
+//    private class SaveFlightDetailsTask extends AsyncTask<Flight, Void, Void> {
+//        @Override
+//        protected Void doInBackground(FlightDetails... flightDetails) {
+//            FlightDatabase database =FlightDatabase.getInstance(MainActivity.this);
+//            FlightDetailsDAO flightDetailsDao = database.fDAO();
+//            flightDetailsDao.insertFlight(flightDetails[0]);
+//            return null;
+//        }
+//    }
 
     //This is toolbar
 
