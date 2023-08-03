@@ -15,6 +15,10 @@
     <string name="help">需要協助?</string>
     <string name="width">宽度</string>
     <string name="height">高度</string>
+    <string name="currencySave">儲存</string>
+    <string name="currencyShowTransaction">顯示</string>
+    <string name="successfulSave">成功儲存</string>
+    <string name="inputCorrectCurFrom">請輸入正確匯兌代號</string>
     <string name="help_navi">本頁使用指引</string>
     <string name="help_currency">1. 在左上輸入本幣匯兌代號;          2. 在左二輸入需要轉換的貨幣代號;          3. 在右上輸入需要轉換的本幣幣額;          4. 按介面中間的轉換鍵以查看新的幣額</string>
     <string name="change_page">切換模組</string>
@@ -26,4 +30,11 @@
     <string name="about_msg">4模組安卓APP</string>
     <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
     <string name="ok">知道了</string>
+    <string name="inputCorrectCurTo">請輸入正確匯兌代號</string>
+    <string name="alertHeader">問題</string>
+    <string name="alertQuestion">查看明細或刪除記錄</string>
+    <string name="alertView">查看明細</string>
+    <string name="alertDelete">刪除記錄</string>
+    <string name="deleteMsgNotice">已刪除記錄</string>
+    <string name="deleteMsgUndo">還原</string>
 </resources>

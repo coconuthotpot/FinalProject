@@ -17,6 +17,20 @@
     <string name="height">Height</string>
 
 
+    <!-- Strings for Currency Converter -->
+    <string name="currencySave">Save</string>
+    <string name="currencyShowTransaction">Show</string>
+    <string name="successfulSave">Record Saved</string>
+    <string name="inputCorrectCurFrom">Please input a correct currency</string>
+    <string name="inputCorrectCurTo">Please input a correct target currency</string>
+    <string name="alertHeader">Question:</string>
+    <string name="alertQuestion">View or Delete this message?</string>
+    <string name="alertView">View</string>
+    <string name="alertDelete">Delete</string>
+    <string name="deleteMsgNotice">You deleted transaction #</string>
+    <string name="deleteMsgUndo">Undo</string>
+
+
 
     <!-- Strings for Menu Bar -->
     <string name="help_navi">Page Navigation</string>

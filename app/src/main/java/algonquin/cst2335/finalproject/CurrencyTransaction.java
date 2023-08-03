@@ -32,6 +32,8 @@ public class CurrencyTransaction {
         this.showAmount = showAmount;
     }
 
+    public long getId() {return id;}
+
     public String getCurrencyFrom() {return currencyFrom;}
 
     public String getCurrencyTo() {return currencyTo;}

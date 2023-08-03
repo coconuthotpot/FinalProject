@@ -3,6 +3,8 @@ package algonquin.cst2335.finalproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +45,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,9 +57,10 @@ import algonquin.cst2335.finalproject.databinding.ActivityCurrencyDetailsBinding
 
 public class CurrencyActivity extends AppCompatActivity {
 
-    ImageView convertButton, depositButton, withdrawButton;
+    ImageView convertButton;
     TextView showAmount;
     EditText currencyFrom, currencyTo, amountInput;
+    Button save, show;
     ActivityCurrencyBinding currencyBinding;
     Set<String> currenciesList = CurrenciesList.currenciesList;
     RequestQueue queue = null;
@@ -80,6 +85,7 @@ public class CurrencyActivity extends AppCompatActivity {
         ctDAO = ctdb.ctDAO();
 
         currencyModel = new ViewModelProvider(this).get(AppViewModel.class);
+
         currencyTransactions = currencyModel.currencyTransactions.getValue();
 
         // binding corresponding View items
@@ -88,18 +94,22 @@ public class CurrencyActivity extends AppCompatActivity {
         amountInput = currencyBinding.amountFrom;
         showAmount = currencyBinding.amountTo;
 
-        if (currencyTransactions == null) {
-            currencyModel.currencyTransactions.postValue(currencyTransactions = new ArrayList<>());
-            Executor thread0 = Executors.newSingleThreadExecutor();
-            thread0.execute(() ->
-            {
-                currencyTransactions.addAll( ctDAO.getAllTransactions() ); // get the data from database
-                runOnUiThread( () -> currencyBinding.currencyRecycler.setAdapter( myAdapter ));
-            });
-        }
+        currencyModel.currencyTransactions.postValue(currencyTransactions = new ArrayList<>());
 
         // part to send data to recyclerview
         currencyBinding.currencyRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+        // open the fragment view
+        currencyModel.selectedCurTrans.observe(this, newTransValue -> {
+            CurrencyDetailsFragment transFragment = new CurrencyDetailsFragment(newTransValue);
+
+            FragmentManager fMgr = getSupportFragmentManager();
+            FragmentTransaction tx = fMgr.beginTransaction();
+            tx.replace(R.id.transactionFrame, transFragment);
+            tx.addToBackStack("Back to last transaction");
+            tx.commit();
+        });
+
         currencyBinding.currencyRecycler.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
             @Override
             public int getItemViewType(int position) {
@@ -116,10 +126,11 @@ public class CurrencyActivity extends AppCompatActivity {
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 CurrencyTransaction trans = currencyTransactions.get(position);
-                holder.curFromDetails.setText("");
-                holder.amtToDetails.setText("");
-                holder.curFromDetails.setText("");
-                holder.amtToDetails.setText("");
+                holder.idDetails.setText( Long.toString(trans.getId()) );
+                holder.curFromDetails.setText(trans.getCurrencyFrom());
+                holder.amtFromDetails.setText(trans.getAmountInput());
+                holder.curToDetails.setText(trans.getCurrencyTo());
+                holder.amtToDetails.setText(trans.getShowAmount());
             }
 
             @Override
@@ -141,37 +152,17 @@ public class CurrencyActivity extends AppCompatActivity {
         amountInput.setText(prefs.getString("AmountFrom",""));
 
         // binding corresponding buttons
-        depositButton = currencyBinding.deposit;
-        withdrawButton = currencyBinding.withdraw;
         convertButton = currencyBinding.convertButtonImage;
+        save = currencyBinding.saveTransaction;
+        show = currencyBinding.showTransaction;
 
-        /*depositButton.setOnClickListener( click -> {
-            String curFrom = currencyFrom.getText().toString();
-            if (checkCurrency(curFrom) == false) {
-                Snackbar.make(currencyFrom, "Please input a correct original currency", Snackbar.LENGTH_LONG).show();
-            } else {
-                editor.putString("CurrencyFrom", curFrom);
-                editor.apply();
-            }
-
-        });*/
-
-        /*withdrawButton.setOnClickListener( click -> {
-            String curTo = currencyTo.getText().toString();
-            if (checkCurrency(curTo) == false) {
-                Snackbar.make(currencyTo, "Please input a correct target currency", Snackbar.LENGTH_LONG).show();
-            } else {
-                editor.putString("CurrencyTo", curTo);
-                editor.apply();
-            }
-        });*/
 
         // set the retrieved value from API to show on screen
         convertButton.setOnClickListener( click -> {
             // check the input currency code before passing the data to connect API
             String curFrom = currencyFrom.getText().toString().toUpperCase();
             if (checkCurrency(curFrom) == false) {
-                Snackbar.make(currencyFrom, "Please input a correct original currency", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(currencyFrom, getString(R.string.inputCorrectCurFrom), Snackbar.LENGTH_LONG).show();
             } else {
                 editor.putString("CurrencyFrom", curFrom);
                 editor.apply();
@@ -180,7 +171,7 @@ public class CurrencyActivity extends AppCompatActivity {
             // check the input currency code before passing the data to connect API
             String curTo = currencyTo.getText().toString().toUpperCase();
             if (checkCurrency(curTo) == false) {
-                Snackbar.make(currencyTo, "Please input a correct target currency", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(currencyTo, getString(R.string.inputCorrectCurTo), Snackbar.LENGTH_LONG).show();
             } else {
                 editor.putString("CurrencyTo", curTo);
                 editor.apply();
@@ -220,15 +211,38 @@ public class CurrencyActivity extends AppCompatActivity {
 
             queue.add(request);
 
+        });
+
+        // save the query
+        save.setOnClickListener(click -> {
+            String curFrom = currencyFrom.getText().toString().toUpperCase();
+            String curTo = currencyTo.getText().toString().toUpperCase();
+            String amtFrom = amountInput.getText().toString();
+
             CurrencyTransaction transaction = new CurrencyTransaction(curFrom, curTo, amtFrom, showAmount.getText().toString());
             Executor thread1 = Executors.newSingleThreadExecutor();
             thread1.execute( () -> {
                 transaction.id = ctDAO.insertTransaction(transaction);});
-            currencyTransactions.add(transaction);
-            myAdapter.notifyItemInserted(currencyTransactions.size()-1);
+            // message to notice user record is saved
+            Toast.makeText(this, getString(R.string.successfulSave), Toast.LENGTH_LONG).show();
+            //currencyTransactions.add(transaction);
+            //myAdapter.notifyItemInserted(currencyTransactions.size()-1);
         });
 
 
+        // to show all saved queries in recycler view
+        show.setOnClickListener(click -> {
+            // reset recycler view to blank
+            currencyTransactions.clear();
+
+            Executor thread0 = Executors.newSingleThreadExecutor();
+            thread0.execute(() ->
+            {
+                currencyTransactions.addAll( ctDAO.getAllTransactions() ); // get the data from database
+                runOnUiThread( () -> currencyBinding.currencyRecycler.setAdapter( myAdapter ));
+            });
+
+        });
     }
 
     private boolean checkCurrency(String currency) {
@@ -242,22 +256,29 @@ public class CurrencyActivity extends AppCompatActivity {
     }
 
     class MyRowHolder extends RecyclerView.ViewHolder {
-        TextView curFromDetails, curToDetails, amtFromDetails, amtToDetails;
+        TextView idDetails, curFromDetails, curToDetails, amtFromDetails, amtToDetails;
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
+            idDetails = itemView.findViewById(R.id.idDetails);
             curFromDetails = itemView.findViewById(R.id.currencyFromDetails);
             curToDetails = itemView.findViewById(R.id.currencyToDetails);
             amtFromDetails = itemView.findViewById(R.id.amountFromDetails);
             amtToDetails = itemView.findViewById(R.id.amountToDetails);
 
+            // can delete or view clicked transaction individually
             itemView.setOnClickListener(click -> {
                 int position = getAbsoluteAdapterPosition();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder( CurrencyActivity.this );
-                builder.setTitle("Question:");
-                builder.setMessage("Delete this message?: "  + curFromDetails.getText());
+                builder.setTitle(getString(R.string.alertHeader));
+                builder.setMessage(getString(R.string.alertQuestion));
 
-                builder.setPositiveButton("Yes", ((dialog, clk) ->{
+                builder.setPositiveButton( getString(R.string.alertView), ((dialog, clk) ->{
+                    CurrencyTransaction selected = currencyTransactions.get(position);
+                    currencyModel.selectedCurTrans.postValue(selected);
+                } ));
+
+                builder.setNegativeButton( getString(R.string.alertDelete), ((dialog, clk) ->{
                     CurrencyTransaction removedMsg = currencyTransactions.get(position);
 
                     Executor thread2 = Executors.newSingleThreadExecutor();
@@ -268,8 +289,8 @@ public class CurrencyActivity extends AppCompatActivity {
                     currencyTransactions.remove(position);
                     myAdapter.notifyItemRemoved(position);
 
-                    Snackbar.make(curFromDetails, "You deleted message#" + position, Snackbar.LENGTH_LONG)
-                            .setAction("Undo", check -> {
+                    Snackbar.make(curFromDetails, getString(R.string.deleteMsgNotice) + position, Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.deleteMsgUndo), check -> {
                                 currencyTransactions.add(position, removedMsg);
                                 myAdapter.notifyItemInserted(position);
                             })
@@ -277,9 +298,8 @@ public class CurrencyActivity extends AppCompatActivity {
 
                 } ));
 
-                builder.setNegativeButton("No", ((dialog, clk) ->{} ));
-
                 builder.create().show();
+
             });
 
         }

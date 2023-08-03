@@ -7,35 +7,44 @@
 
     <TextView
         android:id="@+id/currencyFromDetails"
-        android:layout_width="wrap_content"
+        android:layout_width="80sp"
         android:layout_height="wrap_content"
         android:text="Currency From"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idDetails"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/currencyToDetails"
-        android:layout_width="wrap_content"
+        android:layout_width="80sp"
         android:layout_height="wrap_content"
         android:text="Currency To"
+        app:layout_constraintBottom_toBottomOf="@+id/amountToDetails"
+        app:layout_constraintEnd_toStartOf="@+id/amountToDetails"
+        app:layout_constraintStart_toEndOf="@+id/amountFromDetails"
+        app:layout_constraintTop_toTopOf="@+id/amountToDetails" />
+
+    <TextView
+        android:id="@+id/amountFromDetails"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:text="Amount From"
+        app:layout_constraintBottom_toBottomOf="@+id/currencyFromDetails"
+        app:layout_constraintStart_toEndOf="@+id/currencyFromDetails"
+        app:layout_constraintTop_toTopOf="@+id/currencyFromDetails" />
+
+    <TextView
+        android:id="@+id/amountToDetails"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:text="Amount To"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/amountFromDetails"
-        android:layout_width="wrap_content"
+        android:id="@+id/idDetails"
+        android:layout_width="50sp"
         android:layout_height="wrap_content"
-        android:text="Amount From"
-        app:layout_constraintEnd_toEndOf="@+id/currencyFromDetails"
-        app:layout_constraintStart_toStartOf="@+id/currencyFromDetails"
-        app:layout_constraintTop_toBottomOf="@+id/currencyFromDetails" />
-
-    <TextView
-        android:id="@+id/amountToDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Amount To"
-        app:layout_constraintEnd_toEndOf="@+id/currencyToDetails"
-        app:layout_constraintStart_toStartOf="@+id/currencyToDetails"
-        app:layout_constraintTop_toBottomOf="@+id/currencyToDetails" />
+        android:text="ID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
