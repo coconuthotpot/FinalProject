@@ -11,10 +11,22 @@
     <string name="currencyAmount">Amount</string>
     <string name="help">Need Help?</string>
 
+    <string name="submit">Submit</string>
+    <string name="save">Save</string>
+    <string name="geography">Geography</string>
+    <string name="sports">Sports</string>
+    <string name="textQuestionAmount">The number of questions</string>
+    <string name="textCategory">Please select a question topic</string>
+    <string name="total_question">Total Questions</string>
+    <string name="help_trivia">1. Input the numbers you want to answer;
+        2. Start to choose the answer for each question and submit;
+        3. After you finish all question you can see the score this time. </string>
 
 
     <string name="width">Weight</string>
     <string name="height">Height</string>
+    <string name="help_bear">Enter Width and Height , then press generate button</string>
+    <string name="pressme">Generate a Bear</string>
 
 
     <!-- Strings for Currency Converter -->
@@ -46,4 +58,7 @@
 
     <string name="help_main">Click any module you need; Can change to other page by clicking top right help bar</string>
     <string name="help_currency">1. Input Currency Code be converted from in top left field; 2. Input Currency Code be converted to in the next left field; 3. Input the amount you want to convert in the original currency in top right field; 4. Click the CONVERT button in the center to get the amount in target currency</string>
+    <string name="generate_bear">First button</string>
+    <string name="enter_width">Enter Width</string>
+    <string name="enter_height">Enter Height</string>
 </resources>
