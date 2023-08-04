@@ -55,21 +55,80 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.finalproject.databinding.ActivityCurrencyBinding;
 import algonquin.cst2335.finalproject.databinding.ActivityCurrencyDetailsBinding;
 
+/**
+ * Class to implement Currency Converter logics
+ * let user input currency info, amount to convert to retrieve converted amount from app
+ * Also, user can save and retrieve record from previous conversions
+ */
 public class CurrencyActivity extends AppCompatActivity {
 
+    /**
+     * ImageView object for convert button
+     */
     ImageView convertButton;
+
+    /**
+     * TextView object to show amount after conversion
+     */
     TextView showAmount;
+
+    /**
+     * EditText objects to have value from user input
+     */
     EditText currencyFrom, currencyTo, amountInput;
+
+    /**
+     * Button to trigger corresponding actions after clicking save or show button
+     */
     Button save, show;
+
+    /**
+     * a binding object to connect currency module layout to this class to implement app logic
+     */
     ActivityCurrencyBinding currencyBinding;
+
+    /**
+     * a Set Collection stored currency codes for input validation
+     */
     Set<String> currenciesList = CurrenciesList.currenciesList;
+
+    /**
+     * Volley Queue object for API connection
+     */
     RequestQueue queue = null;
+
+    /**
+     * database access object connected to CurrencyTransaction Table to implement database related actions
+     */
     CurrencyTransactionDAO ctDAO;
+
+    /**
+     * a view model to hold mutable live data from changing device's orientation or send info from recycler view to fragment layout
+     */
     AppViewModel currencyModel;
+
+    /**
+     * arraylist to store records retrieved from database
+     */
     ArrayList<CurrencyTransaction> currencyTransactions = new ArrayList<>();
+
+    /**
+     * adapter to establish recycler view within the same layout
+     */
     private RecyclerView.Adapter myAdapter;
+
+    /**
+     * binding object to bind currency details layout to recycler view within this class
+     */
     ActivityCurrencyDetailsBinding binding;
 
+    /**
+     * method to launch Currency Converter module
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,6 +304,11 @@ public class CurrencyActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * method to validate user input for the currency code
+     * @param currency String input of the currency code
+     * @return true if correct, false if incorrect
+     */
     private boolean checkCurrency(String currency) {
         String convertedCurrency = currency.toUpperCase();
 
@@ -255,6 +319,9 @@ public class CurrencyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * inner class to establish recycler view within the same layout
+     */
     class MyRowHolder extends RecyclerView.ViewHolder {
         TextView idDetails, curFromDetails, curToDetails, amtFromDetails, amtToDetails;
         public MyRowHolder(@NonNull View itemView) {
@@ -305,6 +372,12 @@ public class CurrencyActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * method to show option bar on top of the app
+     * @param menu The options menu in which you place your items.
+     *
+     * @return true to use the option bar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -312,6 +385,12 @@ public class CurrencyActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * method to implement option bar logic when user click on selected option
+     * @param item The menu item that was selected.
+     *
+     * @return true to let user choose options in the option bar
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         AlertDialog.Builder builder = new AlertDialog.Builder(CurrencyActivity.this);
