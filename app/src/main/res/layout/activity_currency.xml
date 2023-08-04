@@ -92,11 +92,12 @@
         android:id="@+id/currencyRecycler"
         android:layout_width="match_parent"
         android:layout_height="300dp"
+        android:layout_marginTop="320dp"
         android:background="@color/currencyRecordBG"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ImageView
         android:id="@+id/deposit"
@@ -115,6 +116,36 @@
         app:layout_constraintEnd_toStartOf="@+id/currencyTo"
         app:layout_constraintTop_toTopOf="@+id/currencyTo"
         app:srcCompat="@drawable/withdraw" />
+
+    <Button
+        android:id="@+id/saveTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/currencySave"
+        app:layout_constraintBottom_toBottomOf="@+id/convertButtonImage"
+        app:layout_constraintEnd_toStartOf="@+id/convertButtonImage"
+        app:layout_constraintTop_toTopOf="@+id/convertButtonImage" />
+
+    <Button
+        android:id="@+id/showTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/currencyShowTransaction"
+        app:layout_constraintBottom_toBottomOf="@+id/convertButtonImage"
+        app:layout_constraintStart_toEndOf="@+id/convertButtonImage"
+        app:layout_constraintTop_toTopOf="@+id/convertButtonImage" />
+
+    <FrameLayout
+        android:id="@+id/transactionFrame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

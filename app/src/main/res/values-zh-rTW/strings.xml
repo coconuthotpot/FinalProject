@@ -15,6 +15,10 @@
     <string name="help">需要協助?</string>
     <string name="width">宽度</string>
     <string name="height">高度</string>
+    <string name="currencySave">儲存</string>
+    <string name="currencyShowTransaction">顯示</string>
+    <string name="successfulSave">成功儲存</string>
+    <string name="inputCorrectCurFrom">請輸入正確匯兌代號</string>
     <string name="help_navi">本頁使用指引</string>
     <string name="help_currency">1. 在左上輸入本幣匯兌代號;          2. 在左二輸入需要轉換的貨幣代號;          3. 在右上輸入需要轉換的本幣幣額;          4. 按介面中間的轉換鍵以查看新的幣額</string>
     <string name="change_page">切換模組</string>
@@ -26,17 +30,114 @@
     <string name="about_msg">4模組安卓APP</string>
     <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
     <string name="ok">知道了</string>
-    <string name="help_bear">1. 输入宽度和高度. 2.点击生成熊熊. 3. 得到你的熊熊.  注意: 只能够输入正数</string>
+ BearActivity
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <string name="help_bear">1. 输入宽度和高度. 2.点击生成熊熊. 3. 得到你的熊熊.  注意: 只能够输入正数</string>
+
+
+    <string name="inputCorrectCurTo">請輸入正確匯兌代號</string>
+    <string name="alertHeader">問題</string>
+    <string name="alertQuestion">查看明細或刪除記錄</string>
+    <string name="alertView">查看明細</string>
+    <string name="alertDelete">刪除記錄</string>
+    <string name="deleteMsgNotice">已刪除記錄</string>
+    <string name="deleteMsgUndo">還原</string>
+
+    <string name="help_bear">输入宽度和高度，再点击生成按钮</string>
+ master
 
 
     <string name="pressme">生成熊熊</string>
     <string name="generate_bear">第一个按钮</string>
     <string name="enter_width">输入宽度</string>
     <string name="enter_height">输入高度</string>
+ BearActivity
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
     <string name="delete">你想删除图片吗 </string>
     <string name="Question">提示！ </string>
     <string name="generated"> 生成熊熊图片尺寸为 </string>
     <string name="askgenerated"> 你想要生成熊熊图片吗  </string>
     <string name="checkvalue"> 请输入正数  </string>
     <string name="welcomebear"> 欢迎使用熊熊生成器! </string>
+
+
+    <string name="submit">提交</string>
+    <string name="save">儲存</string>
+    <string name="geography">地理問題</string>
+    <string name="sports">運動問題</string>
+    <string name="textQuestionAmount">想回答多少問題</string>
+    <string name="textCategory">請選擇問題類別</string>
+    <string name="total_question">全部問題數量總共是</string>
+    <string name="help_trivia">1. 輸入你想回答問題的數量並儲存; 2.選擇每題答案並按提交按鈕; 3.完成所有題目後你可以看到這次的分數</string>
+
+ master
 </resources>

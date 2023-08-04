@@ -11,6 +11,16 @@
     <string name="currencyAmount">Amount</string>
     <string name="help">Need Help?</string>
 
+    <string name="submit">Submit</string>
+    <string name="save">Save</string>
+    <string name="geography">Geography</string>
+    <string name="sports">Sports</string>
+    <string name="textQuestionAmount">The number of questions</string>
+    <string name="textCategory">Please select a question topic</string>
+    <string name="total_question">Total Questions</string>
+    <string name="help_trivia">1. Input the numbers you want to answer;
+        2. Start to choose the answer for each question and submit;
+        3. After you finish all question you can see the score this time. </string>
 
 
 
@@ -26,6 +36,20 @@
     <string name="welcomebear"> Welcome to Bear Generator! </string>
 
 
+
+
+    <!-- Strings for Currency Converter -->
+    <string name="currencySave">Save</string>
+    <string name="currencyShowTransaction">Show</string>
+    <string name="successfulSave">Record Saved</string>
+    <string name="inputCorrectCurFrom">Please input a correct currency</string>
+    <string name="inputCorrectCurTo">Please input a correct target currency</string>
+    <string name="alertHeader">Question:</string>
+    <string name="alertQuestion">View or Delete this message?</string>
+    <string name="alertView">View</string>
+    <string name="alertDelete">Delete</string>
+    <string name="deleteMsgNotice">You deleted transaction #</string>
+    <string name="deleteMsgUndo">Undo</string>
 
 
 
