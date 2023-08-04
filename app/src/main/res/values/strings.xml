@@ -23,10 +23,19 @@
         3. After you finish all question you can see the score this time. </string>
 
 
+
     <string name="width">Weight</string>
     <string name="height">Height</string>
-    <string name="help_bear">Enter Width and Height , then press generate button</string>
+    <string name="help_bear">1. Enter Width and Height. 2.Press generate button. 3. Get your bear image.  Note: Only enter positive value</string>
     <string name="pressme">Generate a Bear</string>
+    <string name="delete">Do you want to delete image  </string>
+    <string name="Question">Alter! </string>
+    <string name="generated"> A bear has generated with </string>
+    <string name="askgenerated"> Do you want to generate a bear with  </string>
+    <string name="checkvalue"> Please enter positive value  </string>
+    <string name="welcomebear"> Welcome to Bear Generator! </string>
+
+
 
 
     <!-- Strings for Currency Converter -->
