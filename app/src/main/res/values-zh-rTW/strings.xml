@@ -30,7 +30,7 @@
     <string name="about_msg">4模組安卓APP</string>
     <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
     <string name="ok">知道了</string>
- BearActivity
+
    
   
   
@@ -90,15 +90,15 @@
     <string name="deleteMsgNotice">已刪除記錄</string>
     <string name="deleteMsgUndo">還原</string>
 
-    <string name="help_bear">输入宽度和高度，再点击生成按钮</string>
- master
+
+
 
 
     <string name="pressme">生成熊熊</string>
     <string name="generate_bear">第一个按钮</string>
     <string name="enter_width">输入宽度</string>
     <string name="enter_height">输入高度</string>
- BearActivity
+
                    
                    
                    
@@ -139,5 +139,5 @@
     <string name="total_question">全部問題數量總共是</string>
     <string name="help_trivia">1. 輸入你想回答問題的數量並儲存; 2.選擇每題答案並按提交按鈕; 3.完成所有題目後你可以看到這次的分數</string>
 
- master
+
 </resources>
