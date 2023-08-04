@@ -93,7 +93,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=4df1a0c8f71a7cc884ba36e84e591a64&dep_iata="
+           String url = "http://api.aviationstack.com/v1/flights?access_key=167b506fe0b21c64ad00314e0278cd8b&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -142,14 +142,11 @@ public class AviationActivity extends AppCompatActivity {
 
         showButton.setOnClickListener(view -> {
 
-            FlightDatabase database = FlightDatabase.getInstance(this);
-            FlightDetailsDAO flightDetailsDao = database.fDAO();
 
-            // 从数据库中获取所有航班详细信息
-            List<FlightDetails> allFlightDetails = flightDetailsDao.getAllFlight();
+            Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
+            startActivity(intent);
 
-            // 更新适配器
-            flightAdapter.setData(allFlightDetails);
+
 
         });
 
