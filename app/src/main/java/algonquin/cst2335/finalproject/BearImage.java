@@ -1,51 +1,99 @@
 package algonquin.cst2335.finalproject;
 
+import android.graphics.Bitmap;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * this class present the object of bear image
+ */
 @Entity
 public class BearImage {
+    /**
+     * the width of the image
+     */
     @ColumnInfo(name="Width")
-    private int width;
+    String width;
 
+    /**
+     * the height of the image
+     */
     @ColumnInfo(name="Height")
-    private int height;
-    @ColumnInfo(name="URL")
-    private String imageUrl;
+    String height;
 
+    /**
+     * the time that image generated
+     */
+    @ColumnInfo(name = "timeGenerated")
+    protected String timeGenerated;
+
+
+    /**
+     *the id of the image
+     */
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="ID")
     public long id;
 
-    public BearImage(int width, int height, String imageUrl) {
+    /**
+     *the no arg constructor
+     */
+    public BearImage(){}
+
+    /**
+     * this is the constructor
+     * @param timeGenerated  the time image generater
+     * @param width  the width of image
+     * @param height the height of image
+     */
+    public BearImage(String timeGenerated,String width, String height) {
+        this.timeGenerated= timeGenerated;
         this.width = width;
         this.height = height;
-        this.imageUrl = imageUrl;
+
     }
 
-    public int getWidth() {
+    /**
+     * get the width of the image
+     * @return return the width
+     */
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    /**
+     * set the width of image
+     * @param width the width to be setted
+     */
+    public void setWidth(String width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    /**
+     * get the height of the image
+     * @return return the height of the image
+     */
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    /**
+     * set the height of the image
+     * @param height return the height of image
+     */
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    /**
+     * get the time of image generated
+     * @return return the time of image generated
+     */
+    public String getTimeGenerated() {
+        return timeGenerated;
     }
 
 }

@@ -26,11 +26,17 @@
     <string name="about_msg">4模組安卓APP</string>
     <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
     <string name="ok">知道了</string>
-    <string name="help_bear">输入宽度和高度，再点击生成按钮</string>
+    <string name="help_bear">1. 输入宽度和高度. 2.点击生成熊熊. 3. 得到你的熊熊.  注意: 只能够输入正数</string>
 
 
     <string name="pressme">生成熊熊</string>
     <string name="generate_bear">第一个按钮</string>
     <string name="enter_width">输入宽度</string>
     <string name="enter_height">输入高度</string>
+    <string name="delete">你想删除图片吗 </string>
+    <string name="Question">提示！ </string>
+    <string name="generated"> 生成熊熊图片尺寸为 </string>
+    <string name="askgenerated"> 你想要生成熊熊图片吗  </string>
+    <string name="checkvalue"> 请输入正数  </string>
+    <string name="welcomebear"> 欢迎使用熊熊生成器! </string>
 </resources>
