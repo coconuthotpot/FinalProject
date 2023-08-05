@@ -69,5 +69,21 @@ public class FlightAdapter2 extends RecyclerView.Adapter<FlightAdapter2.FlightVi
         return flightDetailsList.size();
     }
 
+    public void removeFlight(FlightDetails flight) {
+        int position = flightDetailsList.indexOf(flight);
+        if (position != -1) {
+            flightDetailsList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    // Method to add a flight to the list
+    public void addFlight(FlightDetails flightDetails) {
+        flightDetailsList.add(flightDetails);
+        notifyDataSetChanged();
+    }
+
 }
+
+
 

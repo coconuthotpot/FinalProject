@@ -157,8 +157,6 @@ public class AviationActivity extends AppCompatActivity {
                 .replace(R.id.fragmentLocation, fragment)
                 .addToBackStack(null)
                 .commit();
-
-
     }
 
     //This is toolbar

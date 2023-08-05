@@ -31,17 +31,16 @@ public class AviationActivity2 extends AviationActivity{
             List<FlightDetails> flightDetailsList = flightDetailsDao.getAllFlight(); // 获取所有航班信息
 
             runOnUiThread(() -> {
-                FlightAdapter2 adapter2 = new FlightAdapter2(flightDetailsList,this::onItemClick);
+                FlightAdapter2 adapter2 = new FlightAdapter2(flightDetailsList, this::onItemClick);
                 recyclerView2.setAdapter(adapter2);
             });
         }).start();
 
-
-}
+    }
 
     public void onItemClick(FlightDetails flightDetails) {
         // Create a new instance of FlightDetailsFragment and pass the selected flight details
-        FlightDetailsFragment fragment = new FlightDetailsFragment(flightDetails.getFlightDetails());
+        FlightDetailsFragment2 fragment = new FlightDetailsFragment2(flightDetails.getFlightDetails());
 
         // Use FragmentManager to add the fragment to the activity
         getSupportFragmentManager().beginTransaction()
