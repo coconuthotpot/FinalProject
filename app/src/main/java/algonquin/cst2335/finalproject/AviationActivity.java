@@ -66,9 +66,8 @@ public class AviationActivity extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
 
-        recyclerView = binding.recyclerView;
-
         //set RecyclerView
+        recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -93,7 +92,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=167b506fe0b21c64ad00314e0278cd8b&dep_iata="
+           String url = "http://api.aviationstack.com/v1/flights?access_key=759c0713dafab046cd1be65d750e21a8&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -142,11 +141,8 @@ public class AviationActivity extends AppCompatActivity {
 
         showButton.setOnClickListener(view -> {
 
-
             Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
             startActivity(intent);
-
-
 
         });
 
@@ -162,20 +158,8 @@ public class AviationActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
 
-        // Save the flight details to the database in AsyncTask
-       // new SaveFlightDetailsTask().execute(flight);
 
     }
-
-//    private class SaveFlightDetailsTask extends AsyncTask<Flight, Void, Void> {
-//        @Override
-//        protected Void doInBackground(FlightDetails... flightDetails) {
-//            FlightDatabase database =FlightDatabase.getInstance(MainActivity.this);
-//            FlightDetailsDAO flightDetailsDao = database.fDAO();
-//            flightDetailsDao.insertFlight(flightDetails[0]);
-//            return null;
-//        }
-//    }
 
     //This is toolbar
 

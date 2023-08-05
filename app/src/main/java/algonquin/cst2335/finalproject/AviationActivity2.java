@@ -7,8 +7,12 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
 
 public class AviationActivity2 extends AviationActivity{
 
@@ -18,28 +22,35 @@ public class AviationActivity2 extends AviationActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aviation2);
 
-        Button showSnackbarButton = findViewById(R.id.button2);
-        Button showAlertDialogButton = findViewById(R.id.button3);
-        View parentLayout = findViewById(android.R.id.content);
+        RecyclerView recyclerView2 = findViewById(R.id.recycleView2);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
 
-        showSnackbarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar snackbar = Snackbar.make(parentLayout, "This is a Snackbar notification", Snackbar.LENGTH_SHORT);
-                snackbar.show();
-            }
-        });
+        new Thread(() -> {
+            FlightDatabase database = FlightDatabase.getInstance(AviationActivity2.this);
+            FlightDetailsDAO flightDetailsDao = database.fDAO();
+            List<FlightDetails> flightDetailsList = flightDetailsDao.getAllFlight(); // 获取所有航班信息
 
-        showAlertDialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AviationActivity2.this);
-                builder.setTitle("Alert")
-                        .setMessage("This is an AlertDialog notification")
-                        .setPositiveButton("OK", null)
-                        .show();
-            }
+            runOnUiThread(() -> {
+                FlightAdapter2 adapter2 = new FlightAdapter2(flightDetailsList,this::onItemClick);
+                recyclerView2.setAdapter(adapter2);
+            });
+        }).start();
 
-    });
-}}
+
+}
+
+    public void onItemClick(FlightDetails flightDetails) {
+        // Create a new instance of FlightDetailsFragment and pass the selected flight details
+        FlightDetailsFragment fragment = new FlightDetailsFragment(flightDetails.getFlightDetails());
+
+        // Use FragmentManager to add the fragment to the activity
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLocation2, fragment)
+                .addToBackStack(null)
+                .commit();
+
+
+    }
+
+}
 

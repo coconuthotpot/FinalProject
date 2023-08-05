@@ -98,5 +98,16 @@ public class FlightDetails {
     public void setId(long id) {
         this.id = id;
     }
+
+    public FlightDetails getFlightDetails() {
+        FlightDetails flightDetails = new FlightDetails();
+        flightDetails.setNumber(number);
+        flightDetails.setDeparture_airport(departure_airport);
+        flightDetails.setDestination_airport(destination_airport);
+        flightDetails.setDeparture_terminal(departure_terminal);
+        flightDetails.setGate(gate);
+        flightDetails.setDelay(delay);
+        return flightDetails;
+    }
 }
 

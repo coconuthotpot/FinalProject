@@ -31,10 +31,9 @@ public class FlightDetailsFragment extends Fragment {
         binding.delay.setText("Delay Time:"+String.valueOf(selected.delay));
 
         binding.save.setOnClickListener(v -> {
-            // 在这里执行你的保存操作，可以将航班详细信息保存到数据库或保存到文件
-            // 例如：保存到数据库
+
             saveFlightDetailsToDatabase(selected);
-            Toast.makeText(requireContext(), "保存成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Saved Successfully", Toast.LENGTH_SHORT).show();
 
         });
         return binding.getRoot ();
