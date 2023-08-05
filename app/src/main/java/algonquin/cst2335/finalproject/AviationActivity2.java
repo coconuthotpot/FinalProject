@@ -37,7 +37,6 @@ public class AviationActivity2 extends AviationActivity{
         }).start();
 
     }
-
     public void onItemClick(FlightDetails flightDetails) {
         // Create a new instance of FlightDetailsFragment and pass the selected flight details
         FlightDetailsFragment2 fragment = new FlightDetailsFragment2(flightDetails.getFlightDetails());
@@ -47,9 +46,8 @@ public class AviationActivity2 extends AviationActivity{
                 .replace(R.id.fragmentLocation2, fragment)
                 .addToBackStack(null)
                 .commit();
-
-
     }
+
 
 }
 

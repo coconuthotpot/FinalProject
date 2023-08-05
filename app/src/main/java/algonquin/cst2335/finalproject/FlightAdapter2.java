@@ -23,6 +23,7 @@ public class FlightAdapter2 extends RecyclerView.Adapter<FlightAdapter2.FlightVi
         notifyDataSetChanged();
     }
 
+
     public FlightAdapter2(List<FlightDetails> flightDetailsList, OnItemClickListener onItemClickListener) {
         this.flightDetailsList = flightDetailsList;
         this.onItemClickListener = onItemClickListener;
