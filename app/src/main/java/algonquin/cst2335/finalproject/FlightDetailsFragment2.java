@@ -5,24 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import algonquin.cst2335.finalproject.databinding.ActivityAviation2Binding;
 import algonquin.cst2335.finalproject.databinding.FlightDetailsLayout2Binding;
-import algonquin.cst2335.finalproject.databinding.FlightDetailsLayoutBinding;
 
 public class FlightDetailsFragment2 extends Fragment {
 
     FlightDetails selected;
+
+    ArrayList<FlightDetails> flightDetails;
+
     private FlightDetailsLayout2Binding binding; // Add this class-level member for binding
 
     private FlightAdapter2 flightAdapter2;
@@ -64,9 +63,9 @@ public class FlightDetailsFragment2 extends Fragment {
             new Thread(() -> {
                 FlightDatabase database = FlightDatabase.getInstance(getContext());
                 FlightDetailsDAO flightDetailsDao = database.fDAO();
-                flightDetailsDao.deleteFlight(flightDetails); // Delete the flight information
+                flightDetailsDao.deleteFlight(selected);
+                flightAdapter2.removeFlight(selected);// Delete the flight information
                 List<FlightDetails> updatedFlightDetailsList = flightDetailsDao.getAllFlight();
-
                 // Notify the adapter to update the data set with the latest information and refresh the RecyclerView
                 flightAdapter2.setData(updatedFlightDetailsList);
 
@@ -80,7 +79,7 @@ public class FlightDetailsFragment2 extends Fragment {
                                 new Thread(() -> {
                                     FlightDatabase undoDatabase = FlightDatabase.getInstance(getContext());
                                     FlightDetailsDAO undoFlightDetailsDao = undoDatabase.fDAO();
-                                    undoFlightDetailsDao.insertFlight(flightDetails);
+                                    undoFlightDetailsDao.insertFlight(selected);
                                     List<FlightDetails> undoFlightDetailsList = flightDetailsDao.getAllFlight();
 
                                     // Notify the adapter to update the data set with the latest information and refresh the RecyclerView

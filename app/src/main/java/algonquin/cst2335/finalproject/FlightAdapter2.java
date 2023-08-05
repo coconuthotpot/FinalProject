@@ -84,6 +84,8 @@ public class FlightAdapter2 extends RecyclerView.Adapter<FlightAdapter2.FlightVi
         notifyDataSetChanged();
     }
 
+
+
 }
 
 
