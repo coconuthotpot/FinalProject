@@ -36,19 +36,42 @@ import android.util.Log;
 
 import algonquin.cst2335.finalproject.databinding.ActivityAviationBinding;
 
+/**
+ * This activity displays aviation flight information using an external API.
+ * It allows the user to search for flights by airport code and view flight details.
+ * @author Ying Tu
+ * @version 1.0
+ */
 public class AviationActivity extends AppCompatActivity {
+
+    /**
+     * Declare the binding
+     */
     ActivityAviationBinding binding;
 
+    /**
+     * Constants for SharedPreferences
+     */
     private static final String PREFS_NAME = "MyPrefs";
     private static final String KEY_TEXT = "textInput";
+
+    /**
+     * Views and variables
+     */
     protected EditText airportCode;
     protected RequestQueue queue = null;
     private RecyclerView recyclerView;
-
     private FlightAdapter flightAdapter;
     private List<Flight> flightList;
-    private List<FlightDetails> flightDetailsList;
 
+    /**
+     * Called when the activity is created.
+     * Initializes the layout, views, and RecyclerView.
+     * Retrieves previously saved input text from SharedPreferences.
+     * Sets up the search and show buttons' click listeners.
+     *
+     * @param savedInstanceState The saved instance state bundle (not used here).
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +101,6 @@ public class AviationActivity extends AppCompatActivity {
         flightAdapter = new FlightAdapter(flightList, this::onItemClick);
         recyclerView.setAdapter(flightAdapter);
 
-        // 当航班列表项被点击时，启动FlightDetailActivity并传递航班信息
-
         Button searchButton = findViewById(R.id.search);
         Button showButton = findViewById(R.id.showList);
 
@@ -92,7 +113,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=759c0713dafab046cd1be65d750e21a8&dep_iata="
+           String url = "http://api.aviationstack.com/v1/flights?access_key=1a4b77dc2905da719b3def26abc6cb1a&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -148,6 +169,13 @@ public class AviationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Handles the click event when a flight item in the RecyclerView is clicked.
+     * Opens a new FlightDetailsFragment to display the selected flight details.
+     *
+     * @param flight The Flight object representing the selected flight.
+     */
+
     public void onItemClick(Flight flight) {
         // Create a new instance of FlightDetailsFragment and pass the selected flight details
         FlightDetailsFragment fragment = new FlightDetailsFragment(flight.getFlightDetails());
@@ -159,14 +187,27 @@ public class AviationActivity extends AppCompatActivity {
                 .commit();
     }
 
-    //This is toolbar
 
+    /**
+     * Initializes the options menu (toolbar menu) of the activity.
+     *
+     * @param menu The menu to be initialized.
+     * @return true to display the menu; false otherwise.
+     */
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.app_menu, menu);
         return true;
     }
 
+    /**
+     * Handles the selection of an item from the options menu (toolbar menu).
+     * Shows different dialogs or navigates to other activities based on the selected menu item.
+     *
+     * @param item The selected menu item.
+     * @return true if the menu item is handled; false otherwise.
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         AlertDialog.Builder builder = new AlertDialog.Builder(AviationActivity.this);

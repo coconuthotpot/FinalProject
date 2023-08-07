@@ -1,5 +1,12 @@
 package algonquin.cst2335.finalproject;
 
+/**
+ * This class represents a flight with its associated details.
+ * It stores information such as flight number, destination airport, departure airport,
+ * departure terminal, gate, and delay.
+ *@author Ying Tu
+ *@version 1.0
+ */
 public class Flight {
     private String flightNumber;
     private String destination_airport;
@@ -12,6 +19,16 @@ public class Flight {
 
     private int delay;
 
+    /**
+     * Constructs a new Flight object with the specified details.
+     *
+     * @param flightNumber       The flight number.
+     * @param departure_airport  The airport code of the departure airport.
+     * @param destination_airport The airport code of the destination airport.
+     * @param departure_terminal The terminal for departure.
+     * @param gate               The gate number for departure.
+     * @param delay              The delay time in minutes, if any (0 for no delay).
+     */
     public Flight(String flightNumber, String departure_airport,String destination_airport,String departure_terminal,String gate,int delay) {
         this.flightNumber=flightNumber;
         this.departure_airport=departure_airport;
@@ -22,6 +39,8 @@ public class Flight {
 
     }
 
+    /** Getters and Setters for flight details (flightNumber, destination_airport, etc.)...
+     */
     public String getFlightNumber() {
         return flightNumber;
     }
@@ -71,6 +90,13 @@ public class Flight {
         this.delay = delay;
     }
 
+
+    /**
+     * Retrieves a FlightDetails object with the flight information.
+     * This is useful for passing the flight details to other components or activities.
+     *
+     * @return A FlightDetails object with the flight information.
+     */
     public FlightDetails getFlightDetails() {
         FlightDetails flightDetails = new FlightDetails();
         flightDetails.setNumber(flightNumber);

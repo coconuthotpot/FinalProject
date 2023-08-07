@@ -3,7 +3,13 @@ package algonquin.cst2335.finalproject;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+/**
+ * This is a Room Entity class representing the details of a flight.
+ * It contains various attributes such as flight number, departure airport, destination airport,
+ * departure terminal, gate, delay, and a unique identifier (id) for database storage.
+ *@author Ying Tu
+ *@version 1.0
+ */
 @Entity
 public class FlightDetails {
     @ColumnInfo(name = "number")
@@ -28,7 +34,17 @@ public class FlightDetails {
     @ColumnInfo(name = "id")
     public long id;
 
-
+    /**
+     * Constructs a new FlightDetails object with the specified attributes.
+     *
+     * @param number             The flight number.
+     * @param departure_airport  The departure airport.
+     * @param destination_airport The destination airport.
+     * @param departure_terminal The departure terminal.
+     * @param gate               The gate.
+     * @param delay              The delay in minutes.
+     * @param id                 The unique identifier (id) for database storage.
+     */
     public FlightDetails(String number, String departure_airport, String destination_airport, String departure_terminal, String gate, int delay, long id) {
         this.number = number;
         this.departure_airport = departure_airport;
@@ -39,10 +55,16 @@ public class FlightDetails {
         this.id = id;
     }
 
+    /**
+     * Empty constructor required by Room database.
+     */
     public FlightDetails() {
 
     }
 
+    /**
+     *Getters and setters for the attributes
+     */
     public String getNumber() {
         return number;
     }
@@ -99,6 +121,11 @@ public class FlightDetails {
         this.id = id;
     }
 
+    /**
+     * Returns a new FlightDetails object with the same attributes as the current object.
+     *
+     * @return A new FlightDetails object with the same attributes.
+     */
     public FlightDetails getFlightDetails() {
         FlightDetails flightDetails = new FlightDetails();
         flightDetails.setNumber(number);

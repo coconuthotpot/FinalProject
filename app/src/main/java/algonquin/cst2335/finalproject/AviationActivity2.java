@@ -14,8 +14,24 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+/**
+ * This activity displays a list of saved aviation flight details from a local database.
+ * It extends the {@link AviationActivity} class and inherits its functionality.
+ * The list of flight details is displayed using a RecyclerView with a custom adapter.
+ * When a flight item in the RecyclerView is clicked, it opens a new {@link FlightDetailsFragment2}
+ * to display the selected flight details.
+ * @author Ying Tu
+ * @version 1.0
+ */
 public class AviationActivity2 extends AviationActivity{
 
+    /**
+     * Called when the activity is created.
+     * Initializes the layout, RecyclerView, and database.
+     * Retrieves all flight details from the local database and displays them in the RecyclerView.
+     *
+     * @param savedInstanceState The saved instance state bundle (not used here).
+     */
     protected void onCreate(Bundle savedInstanceState) {
 
 
@@ -37,6 +53,13 @@ public class AviationActivity2 extends AviationActivity{
         }).start();
 
     }
+
+    /**
+     * Handles the click event when a flight item in the RecyclerView is clicked.
+     * Opens a new FlightDetailsFragment2 to display the selected flight details.
+     *
+     * @param flightDetails The FlightDetails object representing the selected flight details.
+     */
     public void onItemClick(FlightDetails flightDetails) {
         // Create a new instance of FlightDetailsFragment and pass the selected flight details
         FlightDetailsFragment2 fragment = new FlightDetailsFragment2(flightDetails.getFlightDetails());
@@ -47,9 +70,5 @@ public class AviationActivity2 extends AviationActivity{
                 .addToBackStack(null)
                 .commit();
     }
-
-
-
-
 }
 
