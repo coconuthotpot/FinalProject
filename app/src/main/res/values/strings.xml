@@ -52,6 +52,18 @@
     <string name="deleteMsgUndo">Undo</string>
 
 
+    <!-- Strings for Aviation -->
+    <string name="help_flight">Enter the airport code , then press search button</string>
+    <string name="flight_hint">Enter airport code</string>
+    <string name="search_button">Search</string>
+    <string name="show_button">Show the lists</string>
+    <string name="save">Save</string>
+    <string name="deleteButton">Delete</string>
+    <string name="flightNumber">Flight Number:</string>
+    <string name="departureAirport">Departure Airport:</string>
+    <string name="destinationAirport">Destination Airport:</string>
+
+
 
     <!-- Strings for Menu Bar -->
     <string name="help_navi">Page Navigation</string>
