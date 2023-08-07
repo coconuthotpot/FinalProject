@@ -41,15 +41,8 @@
 
         <activity
             android:name=".AviationActivity"
-            android:exported="true"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
-
-
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
