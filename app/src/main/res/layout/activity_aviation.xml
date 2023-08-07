@@ -2,14 +2,13 @@
 
     <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentLocation"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/fragmentLocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".AviationActivity">
@@ -34,8 +33,8 @@
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="189dp"
-            android:layout_height="45dp"
+            android:layout_width="179dp"
+            android:layout_height="40dp"
             android:layout_marginTop="36dp"
             android:hint="@string/flight_hint"
             android:inputType="text"

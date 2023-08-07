@@ -10,7 +10,7 @@
         android:id="@+id/textViewFlightNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Flight Number:"
+        android:text="@string/flightNumber"
         android:textStyle="bold"
         android:textSize="16sp"/>
 
@@ -18,14 +18,14 @@
         android:id="@+id/textViewDeparture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Departure Airport:"
+        android:text="@string/departureAirport"
         android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/textViewDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Destination Airport:"
+        android:text="@string/destinationAirport"
         android:textSize="14sp"/>
 
 
