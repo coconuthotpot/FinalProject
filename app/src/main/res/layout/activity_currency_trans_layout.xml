@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/currencyBG" >
+
+    <TextView
+        android:id="@+id/detailsID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="ID goes here"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/idName"
+        app:layout_constraintTop_toBottomOf="@+id/idName" />
+
+    <TextView
+        android:id="@+id/detailsCurFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="20sp"
+        android:text="Currency From goes here"
+        app:layout_constraintStart_toStartOf="@+id/detailsID"
+        app:layout_constraintTop_toBottomOf="@+id/detailsID" />
+
+    <TextView
+        android:id="@+id/detailsAmtFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="20sp"
+        android:text="Amount From goes here"
+        app:layout_constraintStart_toStartOf="@+id/detailsCurFrom"
+        app:layout_constraintTop_toBottomOf="@+id/detailsCurFrom" />
+
+    <TextView
+        android:id="@+id/detailsCurTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="20sp"
+        android:text="Currency To goes here"
+        app:layout_constraintStart_toStartOf="@+id/detailsAmtFrom"
+        app:layout_constraintTop_toBottomOf="@+id/detailsAmtFrom" />
+
+    <TextView
+        android:id="@+id/detailsAmtTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="20sp"
+        android:text="Amount To goes here"
+        app:layout_constraintStart_toStartOf="@+id/detailsCurTo"
+        app:layout_constraintTop_toBottomOf="@+id/detailsCurTo" />
+
+    <TextView
+        android:id="@+id/idName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="60dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="ID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

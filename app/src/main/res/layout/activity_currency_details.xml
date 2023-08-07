@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/currencyFromDetails"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Currency From"
+        app:layout_constraintBottom_toBottomOf="@+id/idDetails"
+        app:layout_constraintStart_toEndOf="@+id/idDetails"
+        app:layout_constraintTop_toTopOf="@+id/idDetails" />
+
+    <TextView
+        android:id="@+id/currencyToDetails"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Currency To"
+        app:layout_constraintBottom_toBottomOf="@+id/amountFromDetails"
+        app:layout_constraintStart_toEndOf="@+id/amountFromDetails"
+        app:layout_constraintTop_toTopOf="@+id/amountFromDetails" />
+
+    <TextView
+        android:id="@+id/amountFromDetails"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Amount From"
+        app:layout_constraintBottom_toBottomOf="@+id/currencyFromDetails"
+        app:layout_constraintStart_toEndOf="@+id/currencyFromDetails"
+        app:layout_constraintTop_toTopOf="@+id/currencyFromDetails" />
+
+    <TextView
+        android:id="@+id/amountToDetails"
+        android:layout_width="80sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Amount To"
+        app:layout_constraintBottom_toBottomOf="@+id/currencyToDetails"
+        app:layout_constraintStart_toEndOf="@+id/currencyToDetails"
+        app:layout_constraintTop_toTopOf="@+id/currencyToDetails" />
+
+    <TextView
+        android:id="@+id/idDetails"
+        android:layout_width="40sp"
+        android:layout_height="wrap_content"
+        android:text="ID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
