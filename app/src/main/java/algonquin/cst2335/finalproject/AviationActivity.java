@@ -72,7 +72,6 @@ public class AviationActivity extends AppCompatActivity {
      *
      * @param savedInstanceState The saved instance state bundle (not used here).
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -113,7 +112,7 @@ public class AviationActivity extends AppCompatActivity {
             editor.putString(KEY_TEXT, inputText);
             editor.apply();
 
-           String url = "http://api.aviationstack.com/v1/flights?access_key=1a4b77dc2905da719b3def26abc6cb1a&dep_iata="
+           String url ="http://api.aviationstack.com/v1/flights?access_key=5f48cb2845197a1cb2ffa193112e7920&dep_iata="
                    + URLEncoder.encode(inputText);
 
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,

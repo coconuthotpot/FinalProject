@@ -22,7 +22,7 @@
     <string name="flight_hint">Enter airport code</string>
     <string name="search_button">Search</string>
     <string name="show_button">Show the lists</string>
-    <string name="save">Save</string>
+    <string name="saveButton">Save</string>
     <string name="deleteButton">Delete</string>
     <string name="flightNumber">Flight Number:</string>
     <string name="departureAirport">Departure Airport:</string>
