@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -159,12 +158,12 @@ public class AviationActivity extends AppCompatActivity {
 
         });
 
-        showButton.setOnClickListener(view -> {
-
-            Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
-            startActivity(intent);
-
-        });
+//        showButton.setOnClickListener(view -> {
+//
+//            Intent intent = new Intent(AviationActivity.this, AviationActivity2.class);
+//            startActivity(intent);
+//
+//        });
 
     }
 

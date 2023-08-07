@@ -9,19 +9,38 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import algonquin.cst2335.finalproject.databinding.ActivityMainBinding;
 
+/**
+ * Class to load launching page of the app
+ * @author Ka Yan Ieong
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * a binding object for connect layout elements to this MainActivity class for app logic implementation
+     */
     ActivityMainBinding binding;
 
+    /**
+     * ImageView objects to bind with corresponding layout elements
+     */
     ImageView aviation, trivia, currency, bear;
 
+    /**
+     * "main" method to start the app
+     * everything starts from here
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * method to start option menu along with the app launched
+     * @param menu The options menu in which you place your items.
+     *
+     * @return true to show options menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -63,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * method to decide which option user picked and take action with corresponding option selected
+     * @param item The menu item that was selected.
+     *
+     * @return true to let user successfully select the option
+     */
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

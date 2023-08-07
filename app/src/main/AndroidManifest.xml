@@ -33,6 +33,12 @@
             android:name=".TriviaActivity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".TriviaHighScoresActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".AviationActivity"
             android:exported="true"

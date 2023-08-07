@@ -7,37 +7,49 @@
     android:layout_height="match_parent"
     tools:context=".BearActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"  />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/width"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
         android:hint="@string/width"
         android:inputType="text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/recycleView" />
 
     <EditText
         android:id="@+id/height"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="280dp"
+        android:layout_marginEnd="120dp"
         android:hint="@string/height"
         android:inputType="text"
         android:textSize="20sp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -48,26 +60,51 @@
         android:layout_marginBottom="50dp"
         android:text="Generate Bear"
         app:layout_constraintBottom_toBottomOf="parent"
+=======
+        app:layout_constraintBottom_toTopOf="@+id/generate"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/width" />
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Enter Width"
-        app:layout_constraintBottom_toTopOf="@+id/width"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/enter_width"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/width"
+        />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Enter Height"
-        app:layout_constraintBottom_toTopOf="@+id/height"
+        android:text="@string/enter_height"
+        app:layout_constraintEnd_toStartOf="@+id/height"
+        app:layout_constraintHorizontal_bias="0.008"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/height"  />
+
+    <Button
+        android:id="@+id/generate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/pressme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragmentLocation"
+        android:layout_width="0dp"
+        android:layout_height="668dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="64dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

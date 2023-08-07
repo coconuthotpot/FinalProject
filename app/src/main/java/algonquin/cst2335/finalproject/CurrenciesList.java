@@ -6,8 +6,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class for currency validation before fetching data from API
+ * @author Ka Yan Ieong
+ * @version 1.0
+ */
 public class CurrenciesList {
 
+    /**
+     * a set collection stored valid currency code
+     */
     public static Set<String> currenciesList = new HashSet<>(Arrays.asList(
             "AED","AFN",
             "ALL","AMD",
