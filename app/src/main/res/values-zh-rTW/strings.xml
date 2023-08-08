@@ -12,6 +12,17 @@
     <string name="currencyAmount">幣額</string>
 
 
+    <string name="help_flight">請輸入機場代碼，然後按搜索鍵</string>
+    <string name="flight_hint">請輸入機場代碼</string>
+    <string name="search_button">搜索</string>
+    <string name="show_button">顯示收藏</string>
+    <string name="saveButton">保存</string>
+    <string name="deleteButton">刪除</string>
+    <string name="flightNumber">航班號:</string>
+    <string name="departureAirport">出發機場：</string>
+    <string name="destinationAirport">抵達機場:</string>
+
+
     <string name="help">需要協助?</string>
     <string name="width">宽度</string>
     <string name="height">高度</string>
@@ -31,55 +42,55 @@
     <string name="help_main">點選需要使用的模組; 可點選右上選項功能切換模組</string>
     <string name="ok">知道了</string>
 
-   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <string name="help_bear">1. 输入宽度和高度. 2.点击生成熊熊. 3. 得到你的熊熊.  注意: 只能够输入正数</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="help_bear">1. 输入宽度和高度. 2.点击生成熊熊. 3. 得到你的熊熊.  注意: 只能够输入正数</string>
 
 
     <string name="inputCorrectCurTo">請輸入正確匯兌代號</string>
@@ -99,29 +110,29 @@
     <string name="enter_width">输入宽度</string>
     <string name="enter_height">输入高度</string>
 
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
-                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <string name="delete">你想删除图片吗 </string>
     <string name="Question">提示！ </string>
     <string name="generated"> 生成熊熊图片尺寸为 </string>
