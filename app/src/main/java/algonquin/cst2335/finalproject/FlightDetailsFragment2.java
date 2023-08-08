@@ -27,6 +27,7 @@ import algonquin.cst2335.finalproject.databinding.FlightDetailsLayout2Binding;
  */
 public class FlightDetailsFragment2 extends Fragment {
 
+
     // The selected FlightDetails object to display
     FlightDetails selected;
     // ArrayList to store the FlightDetails objects for the RecyclerView
